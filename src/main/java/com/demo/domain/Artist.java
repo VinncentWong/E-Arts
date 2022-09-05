@@ -33,13 +33,13 @@ public class Artist {
 	private String biography;
 	
 	@CreationTimestamp
-	@Temporal(TemporalType.TIME)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date createdAt;
 	
 	@UpdateTimestamp
-	@Temporal(TemporalType.TIME)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date updatedAt;
 	
-	@Temporal(TemporalType.TIME)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date deletedAt;
 }
