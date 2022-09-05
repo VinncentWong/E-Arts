@@ -37,6 +37,6 @@ public class ArtistService {
 		tempPersonal.setDateBirth(dto.getBirthDate());
 		tempPersonal.setArtist(artist);
 		var personal = repository.save(tempPersonal);
-		return util.sendCreated("success create user data", true, personal);
+		return util.sendCreated("success create user data", true, artist);
 	}
 }
