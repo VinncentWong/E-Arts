@@ -25,7 +25,6 @@ public class DatabaseConfig {
 		hikari.setJdbcUrl(url);
 		hikari.setUsername("postgres");
 		hikari.setPassword(password);
-		hikari.setDriverClassName("postgresql");
 		return hikari;
 	}
 }
