@@ -9,6 +9,8 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 
+import com.demo.security.provider.JwtProvider;
+
 @Configuration
 public class SecurityConfig {
 
@@ -28,5 +30,10 @@ public class SecurityConfig {
 		.formLogin().disable()
 		.httpBasic().disable();
 		return http.build();
+	}
+	
+	@Bean
+	public JwtProvider provider() {
+		return new JwtProvider();
 	}
 }
