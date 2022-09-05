@@ -9,6 +9,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 
+import com.demo.security.manager.JwtManager;
 import com.demo.security.provider.JwtProvider;
 
 @Configuration
@@ -35,5 +36,10 @@ public class SecurityConfig {
 	@Bean
 	public JwtProvider provider() {
 		return new JwtProvider();
+	}
+	
+	@Bean
+	public JwtManager manager() {
+		return new JwtManager(provider());
 	}
 }
