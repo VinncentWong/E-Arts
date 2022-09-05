@@ -32,7 +32,7 @@ public class ArtistService {
 	public ResponseEntity<Response> createArtist(SignUpDto dto){
 		Artist artist = new Artist();
 		artist.setEmail(dto.getEmail());
-		artist.setPassword(dto.getPassword());
+		artist.setPassword(bcrypt.encode(dto.getPassword()));
 		PersonalInformation tempPersonal = new PersonalInformation();
 		tempPersonal.setDateBirth(dto.getBirthDate());
 		tempPersonal.setArtist(artist);
