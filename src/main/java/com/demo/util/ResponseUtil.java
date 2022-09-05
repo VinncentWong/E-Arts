@@ -56,4 +56,12 @@ public class ResponseUtil {
 		response.setSuccess(success);
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
 	}
+	
+	public ResponseEntity<Response> sendAccepted(String message, boolean success){
+		Response response = new Response();
+		response.setData(null);
+		response.setMessage(message);
+		response.setSuccess(success);
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
+	}
 }
