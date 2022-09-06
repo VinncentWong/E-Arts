@@ -3,7 +3,9 @@ package com.demo.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -53,5 +55,15 @@ public class ArtistController {
 	@GetMapping("/getexpertise/{id}")
 	public ResponseEntity<Response> getArtistExpertise(@PathVariable Long id) throws ArtistNotFoundException{
 		return service.getArtistExpertise(id);
+	}
+	
+	@DeleteMapping("/deleteexpertise")
+	public ResponseEntity<Response> deleteArtistExpertise(@Param("idArtist") Long idArtist, @Param("idExpertise") Long idExpertise) throws NullPointerException{
+		try {
+			return service.deleteArtistExpertise(idArtist, idExpertise);
+		}
+		catch(NullPointerException ex) {
+			
+		}
 	}
 }
