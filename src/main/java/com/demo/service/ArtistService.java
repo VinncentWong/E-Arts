@@ -11,6 +11,7 @@ import com.demo.domain.Response;
 import com.demo.domain.dto.LoginDto;
 import com.demo.domain.dto.SignUpDto;
 import com.demo.exception.ArtistNotFoundException;
+import com.demo.exception.InternalServerErrorException;
 import com.demo.repositories.ArtistRepository;
 import com.demo.repositories.PersonalInformationRepository;
 import com.demo.util.JwtUtil;
@@ -48,7 +49,7 @@ public class ArtistService {
 		return util.sendCreated("success create user data", true, artist);
 	}
 	
-	public ResponseEntity<Response> loginArtist(LoginDto dto) throws ArtistNotFoundException{
+	public ResponseEntity<Response> loginArtist(LoginDto dto) throws ArtistNotFoundException, InternalServerErrorException{
 		Artist artist = artistRepo.getArtistByEmail(dto.getEmail()).orElseThrow(() -> new ArtistNotFoundException());
 		if(bcrypt.matches(dto.getPassword(), artist.getPassword())) {
 			String token = jwtUtil.generateToken(jwtUtil::implementationGenerateToken, artist);
