@@ -50,4 +50,8 @@ public class ArtistController {
 		return service.addArtistExpertise(id, dto);
 	}
 
+	@GetMapping("/getexpertise/{id}")
+	public ResponseEntity<Response> getArtistExpertise(@PathVariable Long id) throws ArtistNotFoundException{
+		return service.getArtistExpertise(id);
+	}
 }
