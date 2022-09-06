@@ -77,7 +77,7 @@ public class ArtistService {
 	}
 	
 	public ResponseEntity<Response> addArtistExpertise(Long id, ExpertiseDto dto) throws ArtistNotFoundException{
-		Artist artist = artistRepo.findById(id).orElseThrow(() -> new ArtistNotFoundException());
+		artistRepo.findById(id).orElseThrow(() -> new ArtistNotFoundException());
 		Expertise expertise = new Expertise();
 		expertise.setExpertise(dto.getText());
 		return util.sendOk("sukses menambahkan data expertise", true, expertise);
