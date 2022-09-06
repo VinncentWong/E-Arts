@@ -22,5 +22,5 @@ public interface ExpertiseRepository extends CrudRepository<Expertise, Long> {
 	
 	@Modifying
 	@Query(nativeQuery = true, value = "DELETE FROM expertise WHERE id = ?1")
-	void deleteExpertiseDataByExpsrtiseId(Long expertiseId);
+	void deleteExpertiseDataByExpertiseId(Long expertiseId);
 }
