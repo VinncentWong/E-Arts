@@ -16,7 +16,7 @@ import lombok.Data;
 
 @Entity
 @Data
-public class Artist {
+public class Artist implements Human{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
