@@ -29,4 +29,7 @@ public class CustomControllerAdvice {
 	public ResponseEntity<Response> sendInternalServerErrorException(){
 		return util.sendInternalServerError("terjadi kesalahan di dalam server", false);
 	}
+	public ResponseEntity<Response> sendExpertiseNotFoundException(){
+		return util.sendInternalServerError("data expertise tidak ditemukan", false);
+	}
 }
