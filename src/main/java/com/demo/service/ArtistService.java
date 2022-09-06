@@ -117,4 +117,14 @@ public class ArtistService {
 		expertiseRepo.deleteExpertiseDataByExpertiseId(idExpertise);
 		return util.sendOk("sukses menghapus data expertise", true, null);
 	}
+	
+	public ResponseEntity<Response> updateArtistExpertise(Long idExpertise, Long idArtist, ExpertiseDto dto) throws ArtistNotFoundException{
+		artistRepo.findById(idArtist).orElseThrow(() -> new ArtistNotFoundException());
+		Optional<List<Expertise>> expertise = expertiseRepo.getExpertisesByArtistId(idArtist);
+		if(expertise.isEmpty()) {
+			return util.sendOk("data expertise tidak ditemukan", true, expertise);
+		}
+		expertiseRepo.updateExpertiseData(dto.getText(), idExpertise);
+		return util.sendOk("sukses update data expertise", true, null);
+	}
 }
