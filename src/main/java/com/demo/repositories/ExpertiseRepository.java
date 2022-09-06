@@ -19,4 +19,8 @@ public interface ExpertiseRepository extends CrudRepository<Expertise, Long> {
 	@Modifying
 	@Query(nativeQuery = true, value = "UPDATE expertise SET expertise.expertise = ?1 WHERE id = ?2")
 	void updateExpertiseData(String text, Long expertiseId);
+	
+	@Modifying
+	@Query(nativeQuery = true, value = "DELETE FROM expertise WHERE id = ?1")
+	void deleteExpertiseDataByExpsrtiseId(Long expertiseId);
 }
