@@ -48,6 +48,7 @@ public class ArtistService {
 	public ResponseEntity<Response> createArtist(SignUpDto dto){
 		Artist artist = new Artist();
 		artist.setEmail(dto.getEmail());
+		artist.setName(dto.getName());
 		artist.setPassword(bcrypt.encode(dto.getPassword()));
 		PersonalInformation tempPersonal = new PersonalInformation();
 		tempPersonal.setDateBirth(dto.getBirthDate());
@@ -68,10 +69,10 @@ public class ArtistService {
 	
 	public ResponseEntity<Response> getArtistById(Long id) throws ArtistNotFoundException{
 		Artist artist = artistRepo.findById(id).orElseThrow(() -> new ArtistNotFoundException());
-		PersonalInformation personalInformation = personalRepo.getPersonalInformationByArtistId(id).get();
-		Map<String,Object> data = new HashMap<>();
-		data.put("artist", artist);
-		data.put("personal_information", personalInformation);
-		return util.sendOk("data artis ditemukan", true, data);
+//		PersonalInformation personalInformation = personalRepo.getPersonalInformationByArtistId(id).get();
+//		Map<String,Object> data = new HashMap<>();
+//		data.put("artist", artist);
+//		data.put("personal_information", artist);
+		return util.sendOk("data artis ditemukan", true, artist);
 	}
 }
