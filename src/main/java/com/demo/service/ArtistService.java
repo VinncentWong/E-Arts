@@ -72,6 +72,6 @@ public class ArtistService {
 		Map<String,Object> data = new HashMap<>();
 		data.put("artist", artist);
 		data.put("personal_information", personalInformation);
-		return util.sendOk("data artis ditemukan", true, artist);
+		return util.sendOk("data artis ditemukan", true, data);
 	}
 }
