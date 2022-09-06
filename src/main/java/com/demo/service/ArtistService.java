@@ -105,13 +105,18 @@ public class ArtistService {
 		return util.sendOk("data expertise ditemukan", true, expertise);
 	}
 	
-	public ResponseEntity<Response> deleteArtistExpertise(Long idArtist, Long idExpertise) throws NullPointerException{
+	public ResponseEntity<Response> deleteArtistExpertise(Long idArtist, Long idExpertise) throws NullPointerException, ArtistNotFoundException{
+		artistRepo.findById(idArtist).orElseThrow(() -> new ArtistNotFoundException());
 		Optional<List<Expertise>> expertise = expertiseRepo.getExpertisesByArtistId(idArtist);
 		if(expertise.isEmpty()) {
 			return util.sendOk("data expertise tidak ditemukan", true, expertise);
 		}
 		List<Expertise> list = expertise.get();
 		list.removeIf((ex) -> ex.getId() == idExpertise);
+		for(Expertise e: list) {
+			log.info(e.getId() + " ");
+		}
+		expertiseRepo.saveAll(list);
 		return util.sendOk("sukses menghapus data expertise", true, null);
 	}
 }

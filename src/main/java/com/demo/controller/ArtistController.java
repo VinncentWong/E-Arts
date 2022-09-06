@@ -60,7 +60,7 @@ public class ArtistController {
 	
 	@DeleteMapping("/deleteexpertise")
 	public ResponseEntity<Response> deleteArtistExpertise(@Param("idArtist") Long idArtist, @Param("idExpertise") Long idExpertise)
-			throws NullPointerException, ExpertiseNotFoundException{
+			throws NullPointerException, ExpertiseNotFoundException, ArtistNotFoundException{
 		try {
 			return service.deleteArtistExpertise(idArtist, idExpertise);
 		}
