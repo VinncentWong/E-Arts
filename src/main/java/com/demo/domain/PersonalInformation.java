@@ -14,10 +14,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
+import lombok.ToString;
 
 @Entity
 @Data
+@ToString(exclude = "artist")
 public class PersonalInformation {
 
 	@Id
@@ -51,5 +55,6 @@ public class PersonalInformation {
 	private boolean isGenderPrivate;
 	
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JsonIgnore
 	private Artist artist;
 }

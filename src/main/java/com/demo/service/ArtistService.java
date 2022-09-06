@@ -20,7 +20,10 @@ import com.demo.repositories.PersonalInformationRepository;
 import com.demo.util.JwtUtil;
 import com.demo.util.ResponseUtil;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class ArtistService {
 
 	private final PersonalInformationRepository repository;
@@ -68,7 +71,9 @@ public class ArtistService {
 	}
 	
 	public ResponseEntity<Response> getArtistById(Long id) throws ArtistNotFoundException{
+		log.info("masuk ke get artist by id");
 		Artist artist = artistRepo.findById(id).orElseThrow(() -> new ArtistNotFoundException());
+		log.info("artist = " + artist);
 //		PersonalInformation personalInformation = personalRepo.getPersonalInformationByArtistId(id).get();
 //		Map<String,Object> data = new HashMap<>();
 //		data.put("artist", artist);
