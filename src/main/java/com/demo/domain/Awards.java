@@ -11,9 +11,11 @@ import javax.persistence.ManyToOne;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
+import lombok.ToString;
 
 @Entity
 @Data
+@ToString(exclude = "artistId")
 public class Awards {
 	
 	@Id

@@ -2,6 +2,7 @@ package com.demo.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -87,15 +88,19 @@ public class ArtistService {
 	
 	public ResponseEntity<Response> addArtistExpertise(Long id, ExpertiseDto dto) throws ArtistNotFoundException{
 		Artist artist = artistRepo.findById(id).orElseThrow(() -> new ArtistNotFoundException());
-		return null;
+		Expertise expertise = new Expertise();
+		expertise.setExpertise(dto.getText());
+		expertise.setArtist(artist);
+		expertiseRepo.save(expertise);
+		return util.sendCreated("sukses menambahkan expertise", true, expertise);
 	}
 	
 	public ResponseEntity<Response> getArtistExpertise(Long id) throws ArtistNotFoundException{
 		Artist artist = artistRepo.findById(id).orElseThrow(() -> new ArtistNotFoundException());
-		List<Expertise> expertises = artist.getExpertise();
-		if(expertises.isEmpty()) {
-			return util.sendOk("data expertise kosong", true, null);
+		Optional<List<Expertise>> expertise = expertiseRepo.getExpertisesByArtistId(artist.getId());
+		if(expertise.isEmpty()) {
+			return util.sendOk("data expertise tidak ditemukan", true, expertise);
 		}
-		return util.sendOk("data expertise ditemukan! ", true, expertises);
+		return util.sendOk("data expertise ditemukan", true, expertise);
 	}
 }
