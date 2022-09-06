@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.demo.domain.Response;
+import com.demo.domain.dto.LoginDto;
 import com.demo.domain.dto.SignUpDto;
+import com.demo.exception.ArtistNotFoundException;
+import com.demo.exception.InternalServerErrorException;
 import com.demo.service.ArtistService;
 
 @RestController
@@ -25,7 +28,12 @@ public class ArtistController {
 	}
 
 	@PostMapping("/create")
-	public ResponseEntity<Response> createUser(@RequestBody @Valid SignUpDto dto){
+	public ResponseEntity<Response> createArtist(@RequestBody @Valid SignUpDto dto){
 		return service.createArtist(dto);
+	}
+	
+	@PostMapping("/login")
+	public ResponseEntity<Response> loginArtist(@RequestBody @Valid LoginDto dto) throws ArtistNotFoundException, InternalServerErrorException{
+		return service.loginArtist(dto);
 	}
 }
