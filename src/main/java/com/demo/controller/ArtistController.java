@@ -4,6 +4,8 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,5 +37,10 @@ public class ArtistController {
 	@PostMapping("/login")
 	public ResponseEntity<Response> loginArtist(@RequestBody @Valid LoginDto dto) throws ArtistNotFoundException, InternalServerErrorException{
 		return service.loginArtist(dto);
+	}
+	
+	@GetMapping("/get/{id}")
+	public ResponseEntity<Response> getArtistById(@PathVariable Long id) throws ArtistNotFoundException{
+		return service.getArtistById(id);
 	}
 }
