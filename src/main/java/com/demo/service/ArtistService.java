@@ -83,6 +83,7 @@ public class ArtistService {
 		Expertise expertise = new Expertise();
 		expertise.setExpertise(dto.getText());
 		artist.setExpertise(List.of(expertise));
+		artistRepo.save(artist);
 		return util.sendOk("sukses menambahkan data expertise", true, artist);
 	}
 	
