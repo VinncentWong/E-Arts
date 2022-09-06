@@ -18,6 +18,7 @@ import com.demo.domain.dto.ExpertiseDto;
 import com.demo.domain.dto.LoginDto;
 import com.demo.domain.dto.SignUpDto;
 import com.demo.exception.ArtistNotFoundException;
+import com.demo.exception.ExpertiseNotFoundException;
 import com.demo.exception.InternalServerErrorException;
 import com.demo.service.ArtistService;
 
@@ -58,12 +59,13 @@ public class ArtistController {
 	}
 	
 	@DeleteMapping("/deleteexpertise")
-	public ResponseEntity<Response> deleteArtistExpertise(@Param("idArtist") Long idArtist, @Param("idExpertise") Long idExpertise) throws NullPointerException{
+	public ResponseEntity<Response> deleteArtistExpertise(@Param("idArtist") Long idArtist, @Param("idExpertise") Long idExpertise)
+			throws NullPointerException, ExpertiseNotFoundException{
 		try {
 			return service.deleteArtistExpertise(idArtist, idExpertise);
 		}
 		catch(NullPointerException ex) {
-			
+			throw new ExpertiseNotFoundException();
 		}
 	}
 }
