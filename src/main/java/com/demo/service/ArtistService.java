@@ -1,8 +1,5 @@
 package com.demo.service;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -74,10 +71,6 @@ public class ArtistService {
 		log.info("masuk ke get artist by id");
 		Artist artist = artistRepo.findById(id).orElseThrow(() -> new ArtistNotFoundException());
 		log.info("artist = " + artist);
-//		PersonalInformation personalInformation = personalRepo.getPersonalInformationByArtistId(id).get();
-//		Map<String,Object> data = new HashMap<>();
-//		data.put("artist", artist);
-//		data.put("personal_information", artist);
 		return util.sendOk("data artis ditemukan", true, artist);
 	}
 }
