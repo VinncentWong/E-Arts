@@ -73,4 +73,6 @@ public class ArtistService {
 		log.info("artist = " + artist);
 		return util.sendOk("data artis ditemukan", true, artist);
 	}
+	
+	
 }
