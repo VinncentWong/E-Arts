@@ -3,6 +3,7 @@ package com.demo.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -102,5 +103,15 @@ public class ArtistService {
 			return util.sendOk("data expertise tidak ditemukan", true, expertise);
 		}
 		return util.sendOk("data expertise ditemukan", true, expertise);
+	}
+	
+	public ResponseEntity<Response> deleteArtistExpertise(Long idArtist, Long idExpertise) throws NullPointerException{
+		Optional<List<Expertise>> expertise = expertiseRepo.getExpertisesByArtistId(idArtist);
+		if(expertise.isEmpty()) {
+			return util.sendOk("data expertise tidak ditemukan", true, expertise);
+		}
+		List<Expertise> list = expertise.get();
+		list.removeIf((ex) -> ex.getId() == idExpertise);
+		return util.sendOk("sukses menghapus data expertise", true, null);
 	}
 }
