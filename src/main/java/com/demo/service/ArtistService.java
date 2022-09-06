@@ -29,13 +29,17 @@ public class ArtistService {
 	private final ArtistRepository artistRepo;
 	
 	private final JwtUtil<Artist> jwtUtil;
+	
+	private final PersonalInformationRepository personalRepo;
+
 	@Autowired
-	public ArtistService(PersonalInformationRepository repository, BCryptPasswordEncoder bcrypt, ResponseUtil util, ArtistRepository artistRepo, JwtUtil<Artist> jwtUtil) {
+	public ArtistService(PersonalInformationRepository repository, BCryptPasswordEncoder bcrypt, ResponseUtil util, ArtistRepository artistRepo, JwtUtil<Artist> jwtUtil, PersonalInformationRepository personalRepo) {
 		this.repository = repository;
 		this.bcrypt = bcrypt;
 		this.util = util;
 		this.artistRepo = artistRepo;
 		this.jwtUtil = jwtUtil;
+		this.personalRepo = personalRepo;
 	}
 	
 	public ResponseEntity<Response> createArtist(SignUpDto dto){
@@ -57,5 +61,10 @@ public class ArtistService {
 		} else {
 			throw new InternalServerErrorException();
 		}
+	}
+	
+	public ResponseEntity<Response> getArtistById(Long id) throws ArtistNotFoundException{
+		Artist artist = artistRepo.findById(id).orElseThrow(() -> new ArtistNotFoundException());
+		return util.sendOk("data artis ditemukan", true, artist);
 	}
 }
