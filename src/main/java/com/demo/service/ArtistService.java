@@ -6,8 +6,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.demo.domain.Artist;
+import com.demo.domain.Expertise;
 import com.demo.domain.PersonalInformation;
 import com.demo.domain.Response;
+import com.demo.domain.dto.ExpertiseDto;
 import com.demo.domain.dto.LoginDto;
 import com.demo.domain.dto.SignUpDto;
 import com.demo.exception.ArtistNotFoundException;
@@ -74,5 +76,10 @@ public class ArtistService {
 		return util.sendOk("data artis ditemukan", true, artist);
 	}
 	
-	
+	public ResponseEntity<Response> addArtistExpertise(Long id, ExpertiseDto dto) throws ArtistNotFoundException{
+		Artist artist = artistRepo.findById(id).orElseThrow(() -> new ArtistNotFoundException());
+		Expertise expertise = new Expertise();
+		expertise.setExpertise(dto.getText());
+		return util.sendOk("sukses menambahkan data expertise", true, expertise);
+	}
 }
