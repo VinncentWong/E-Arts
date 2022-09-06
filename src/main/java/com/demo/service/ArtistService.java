@@ -1,5 +1,7 @@
 package com.demo.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -77,9 +79,10 @@ public class ArtistService {
 	}
 	
 	public ResponseEntity<Response> addArtistExpertise(Long id, ExpertiseDto dto) throws ArtistNotFoundException{
-		artistRepo.findById(id).orElseThrow(() -> new ArtistNotFoundException());
+		Artist artist = artistRepo.findById(id).orElseThrow(() -> new ArtistNotFoundException());
 		Expertise expertise = new Expertise();
 		expertise.setExpertise(dto.getText());
-		return util.sendOk("sukses menambahkan data expertise", true, expertise);
+		artist.setExpertise(List.of(expertise));
+		return util.sendOk("sukses menambahkan data expertise", true, artist);
 	}
 }
