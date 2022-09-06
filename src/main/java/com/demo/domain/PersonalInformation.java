@@ -55,6 +55,6 @@ public class PersonalInformation {
 	private boolean isGenderPrivate;
 	
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JsonIgnore
+	@JsonIgnore // ignore this property to serialized into JSON because it will caused circular depedency
 	private Artist artist;
 }
