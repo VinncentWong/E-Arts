@@ -111,12 +111,7 @@ public class ArtistService {
 		if(expertise.isEmpty()) {
 			return util.sendOk("data expertise tidak ditemukan", true, expertise);
 		}
-		List<Expertise> list = expertise.get();
-		list.removeIf((ex) -> ex.getId() == idExpertise);
-		for(Expertise e: list) {
-			log.info(e.getId() + " ");
-		}
-		expertiseRepo.saveAll(list);
+		expertiseRepo.deleteExpertiseDataByExpertiseId(idExpertise);
 		return util.sendOk("sukses menghapus data expertise", true, null);
 	}
 }
