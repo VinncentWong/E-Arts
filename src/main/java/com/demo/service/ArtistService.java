@@ -85,4 +85,13 @@ public class ArtistService {
 		artist.setExpertise(List.of(expertise));
 		return util.sendOk("sukses menambahkan data expertise", true, artist);
 	}
+	
+	public ResponseEntity<Response> getArtistExpertise(Long id) throws ArtistNotFoundException{
+		Artist artist = artistRepo.findById(id).orElseThrow(() -> new ArtistNotFoundException());
+		List<Expertise> expertises = artist.getExpertise();
+		if(expertises.isEmpty()) {
+			return util.sendOk("data expertise kosong", true, null);
+		}
+		return util.sendOk("data expertise ditemukan! ", true, expertises);
+	}
 }

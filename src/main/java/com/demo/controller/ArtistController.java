@@ -49,4 +49,5 @@ public class ArtistController {
 	public ResponseEntity<Response> addArtistExpertise(@PathVariable Long id, @RequestBody ExpertiseDto dto) throws ArtistNotFoundException{
 		return service.addArtistExpertise(id, dto);
 	}
+
 }
