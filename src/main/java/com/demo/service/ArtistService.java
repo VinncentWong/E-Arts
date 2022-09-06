@@ -1,5 +1,6 @@
 package com.demo.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import com.demo.domain.dto.SignUpDto;
 import com.demo.exception.ArtistNotFoundException;
 import com.demo.exception.InternalServerErrorException;
 import com.demo.repositories.ArtistRepository;
+import com.demo.repositories.ExpertiseRepository;
 import com.demo.repositories.PersonalInformationRepository;
 import com.demo.util.JwtUtil;
 import com.demo.util.ResponseUtil;
@@ -39,14 +41,19 @@ public class ArtistService {
 	
 	private final PersonalInformationRepository personalRepo;
 
+	private final ExpertiseRepository expertiseRepo;
 	@Autowired
-	public ArtistService(PersonalInformationRepository repository, BCryptPasswordEncoder bcrypt, ResponseUtil util, ArtistRepository artistRepo, JwtUtil<Artist> jwtUtil, PersonalInformationRepository personalRepo) {
+	public ArtistService(PersonalInformationRepository repository, BCryptPasswordEncoder bcrypt, 
+			ResponseUtil util, ArtistRepository artistRepo, JwtUtil<Artist> jwtUtil, 
+			PersonalInformationRepository personalRepo,
+			ExpertiseRepository expertiseRepo) {
 		this.repository = repository;
 		this.bcrypt = bcrypt;
 		this.util = util;
 		this.artistRepo = artistRepo;
 		this.jwtUtil = jwtUtil;
 		this.personalRepo = personalRepo;
+		this.expertiseRepo = expertiseRepo;
 	}
 	
 	public ResponseEntity<Response> createArtist(SignUpDto dto){
@@ -80,11 +87,7 @@ public class ArtistService {
 	
 	public ResponseEntity<Response> addArtistExpertise(Long id, ExpertiseDto dto) throws ArtistNotFoundException{
 		Artist artist = artistRepo.findById(id).orElseThrow(() -> new ArtistNotFoundException());
-		Expertise expertise = new Expertise();
-		expertise.setExpertise(dto.getText());
-		artist.setExpertise(List.of(expertise));
-		artistRepo.save(artist);
-		return util.sendOk("sukses menambahkan data expertise", true, artist);
+		return null;
 	}
 	
 	public ResponseEntity<Response> getArtistExpertise(Long id) throws ArtistNotFoundException{
