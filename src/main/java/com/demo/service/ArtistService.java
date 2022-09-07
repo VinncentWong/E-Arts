@@ -109,10 +109,7 @@ public class ArtistService {
 	public ResponseEntity<Response> deleteArtistExpertise(Long idArtist, Long idExpertise) 
 			throws NullPointerException, ArtistNotFoundException, ExpertiseNotFoundException{
 		artistRepo.findById(idArtist).orElseThrow(() -> new ArtistNotFoundException());
-		List<Expertise> expertise = expertiseRepo.getExpertisesByArtistId(idArtist).orElseThrow(() -> new ExpertiseNotFoundException());
-		if(expertise.isEmpty()) {
-			return util.sendOk("data expertise tidak ditemukan", true, expertise);
-		}
+		expertiseRepo.getExpertisesByArtistId(idArtist).orElseThrow(() -> new ExpertiseNotFoundException());
 		expertiseRepo.deleteExpertiseDataByExpertiseId(idExpertise);
 		return util.sendOk("sukses menghapus data expertise", true, null);
 	}
