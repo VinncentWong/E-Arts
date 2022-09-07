@@ -17,7 +17,7 @@ public interface ExpertiseRepository extends CrudRepository<Expertise, Long> {
 	Optional<List<Expertise>> getExpertisesByArtistId(Long artistId);
 	
 	@Modifying
-	@Query(nativeQuery = true, value = "UPDATE expertise SET expertise.expertise = ?1 WHERE id = ?2")
+	@Query(nativeQuery = true, value = "UPDATE expertise SET expertise = ?1 WHERE id = ?2")
 	void updateExpertiseData(String text, Long expertiseId);
 	
 	@Modifying
