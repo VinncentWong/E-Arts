@@ -55,6 +55,12 @@ public class AwardsService {
 	public ResponseEntity<Response> updateAwards(Long awardsId, Long artistId, AwardsDto dto)
 			throws ArtistNotFoundException, AwardsNotFoundException{
 		artistRepo.findById(artistId).orElseThrow(() -> new ArtistNotFoundException());
+		awardsRepo.findById(awardsId).orElseThrow(() -> new AwardsNotFoundException());
+		awardsRepo.updateAwards(artistId, awardsId, dto.getAwards());
+		return util.sendOk("sukses find awards data", true, null);
+	}
+	
+	public ResponseEntity<Response> deleteAwards(Long awardsId, Long artistId){
 		return null;
 	}
 }
