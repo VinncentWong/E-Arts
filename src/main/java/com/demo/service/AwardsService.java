@@ -60,7 +60,11 @@ public class AwardsService {
 		return util.sendOk("sukses find awards data", true, null);
 	}
 	
-	public ResponseEntity<Response> deleteAwards(Long awardsId, Long artistId){
-		return null;
+	public ResponseEntity<Response> deleteAwards(Long awardsId, Long artistId)
+			throws ArtistNotFoundException, AwardsNotFoundException{
+		artistRepo.findById(artistId).orElseThrow(() -> new ArtistNotFoundException());
+		awardsRepo.findById(awardsId).orElseThrow(() -> new AwardsNotFoundException());
+		awardsRepo.deleteAwards(artistId, awardsId);
+		return util.sendOk("success delete awards data", true, null);
 	}
 }
