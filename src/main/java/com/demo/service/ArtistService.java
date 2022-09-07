@@ -44,10 +44,9 @@ public class ArtistService {
 	private final ArtistRepository artistRepo;
 	
 	private final JwtUtil<Artist> jwtUtil;
-	
-	private final PersonalInformationRepository personalRepo;
 
 	private final ExpertiseRepository expertiseRepo;
+	
 	@Autowired
 	public ArtistService(PersonalInformationRepository repository, BCryptPasswordEncoder bcrypt, 
 			ResponseUtil util, ArtistRepository artistRepo, JwtUtil<Artist> jwtUtil, 
@@ -58,7 +57,6 @@ public class ArtistService {
 		this.util = util;
 		this.artistRepo = artistRepo;
 		this.jwtUtil = jwtUtil;
-		this.personalRepo = personalRepo;
 		this.expertiseRepo = expertiseRepo;
 	}
 	
