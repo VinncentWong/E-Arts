@@ -52,7 +52,7 @@ public class AwardsService {
 		return util.sendOk("success find awards data", true, awards);
 	}
 	
-	public ResponseEntity<Response> updateAwards(Long artistId, AwardsDto dto)
+	public ResponseEntity<Response> updateAwards(Long awardsId, Long artistId, AwardsDto dto)
 			throws ArtistNotFoundException, AwardsNotFoundException{
 		artistRepo.findById(artistId).orElseThrow(() -> new ArtistNotFoundException());
 		return null;
