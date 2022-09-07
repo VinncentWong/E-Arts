@@ -1,5 +1,7 @@
 package com.demo.service;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,10 +45,10 @@ public class AwardsService {
 		return util.sendCreated("success create awards", true, awards);
 	}
 	
-	public ResponseEntity<Response> getAwards(Long awardsId, Long artistId)
+	public ResponseEntity<Response> getAwards(Long artistId)
 			throws ArtistNotFoundException, AwardsNotFoundException{
 		artistRepo.findById(artistId).orElseThrow(() -> new ArtistNotFoundException());
-		Awards awards = awardsRepo.findById(awardsId).orElseThrow(() -> new AwardsNotFoundException());
+		List<Awards> awards = awardsRepo.getAwardsByArtistId(artistId).orElseThrow(() -> new AwardsNotFoundException());
 		return util.sendOk("success find awards data", true, awards);
 	}
 	
