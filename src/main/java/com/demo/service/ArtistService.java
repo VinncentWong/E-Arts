@@ -20,6 +20,7 @@ import com.demo.domain.dto.ExpertiseDto;
 import com.demo.domain.dto.LoginDto;
 import com.demo.domain.dto.SignUpDto;
 import com.demo.exception.ArtistNotFoundException;
+import com.demo.exception.ExpertiseNotFoundException;
 import com.demo.exception.InternalServerErrorException;
 import com.demo.repositories.ArtistRepository;
 import com.demo.repositories.ExpertiseRepository;
@@ -99,12 +100,9 @@ public class ArtistService {
 		return util.sendCreated("sukses menambahkan expertise", true, expertise);
 	}
 	
-	public ResponseEntity<Response> getArtistExpertise(Long id) throws ArtistNotFoundException{
+	public ResponseEntity<Response> getArtistExpertise(Long id) throws ArtistNotFoundException, ExpertiseNotFoundException{
 		Artist artist = artistRepo.findById(id).orElseThrow(() -> new ArtistNotFoundException());
-		Optional<List<Expertise>> expertise = expertiseRepo.getExpertisesByArtistId(artist.getId());
-		if(expertise.isEmpty()) {
-			return util.sendOk("data expertise tidak ditemukan", true, expertise);
-		}
+		List<Expertise> expertise = expertiseRepo.getExpertisesByArtistId(artist.getId()).orElseThrow(() -> new ExpertiseNotFoundException());
 		return util.sendOk("data expertise ditemukan", true, expertise);
 	}
 	
