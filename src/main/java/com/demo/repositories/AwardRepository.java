@@ -22,6 +22,6 @@ public interface AwardRepository extends CrudRepository<Awards, Long>{
 	void updateAwards(Long artistId, Long awardsId, String awards);
 	
 	@Modifying
-	@Query(nativeQuery = true, value = "DELETE FROM awards WHERE artist_id = ?1 AND id = ?2")
+	@Query(nativeQuery = true, value = "DELETE FROM awards WHERE artist_id_id = ?1 AND id = ?2")
 	void deleteAwards(Long artistId, Long awardsId);
 }
