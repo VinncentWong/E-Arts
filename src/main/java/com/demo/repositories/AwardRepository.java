@@ -14,7 +14,7 @@ import com.demo.domain.Awards;
 public interface AwardRepository extends CrudRepository<Awards, Long>{
 	
 	@Modifying
-	@Query(nativeQuery = true, value = "SELECT * FROM awards WHERE artist_id = ?1")
+	@Query(nativeQuery = true, value = "SELECT * FROM awards WHERE artist_id_id = ?1")
 	Optional<List<Awards>> getAwardsByArtistId(Long artistId);
 	
 	@Modifying
