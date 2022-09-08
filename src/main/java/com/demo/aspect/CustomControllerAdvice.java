@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.demo.domain.Response;
 import com.demo.exception.ArtistNotFoundException;
+import com.demo.exception.AwardsNotFoundException;
 import com.demo.exception.ExpertiseNotFoundException;
 import com.demo.exception.InternalServerErrorException;
 import com.demo.util.ResponseUtil;
@@ -34,5 +35,10 @@ public class CustomControllerAdvice {
 	@ExceptionHandler(ExpertiseNotFoundException.class)
 	public ResponseEntity<Response> sendExpertiseNotFoundException(){
 		return util.sendInternalServerError("data expertise tidak ditemukan", false);
+	}
+	
+	@ExceptionHandler(AwardsNotFoundException.class)
+	public ResponseEntity<Response> sendAwardsNotFoundException(){
+		return util.sendInternalServerError("data awards tidak ditemukan", false);
 	}
 }
