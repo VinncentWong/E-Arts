@@ -1,13 +1,16 @@
 package com.demo.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.Predicate;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.expression.MapAccessor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -76,7 +79,10 @@ public class ArtistService {
 		Artist artist = artistRepo.getArtistByEmail(dto.getEmail()).orElseThrow(() -> new ArtistNotFoundException());
 		if(bcrypt.matches(dto.getPassword(), artist.getPassword())) {
 			String token = jwtUtil.generateToken(jwtUtil::implementationGenerateToken, artist);
-			return util.sendOk("user authenticated", true, token);
+			Map<String, Object> map = new HashMap<>();
+			map.put("data", artist);
+			map.put("jwt_token", token);
+			return util.sendOk("user authenticated", true, map);
 		} else {
 			throw new InternalServerErrorException();
 		}
