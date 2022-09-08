@@ -18,7 +18,7 @@ public interface AwardRepository extends CrudRepository<Awards, Long>{
 	Optional<List<Awards>> getAwardsByArtistId(Long artistId);
 	
 	@Modifying
-	@Query(nativeQuery = true, value = "UPDATE awards SET awards = ?3 WHERE id = ?2 AND artist_id = ?1")
+	@Query(nativeQuery = true, value = "UPDATE awards SET awards = ?3 WHERE id = ?2 AND artist_id_id = ?1")
 	void updateAwards(Long artistId, Long awardsId, String awards);
 	
 	@Modifying
