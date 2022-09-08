@@ -51,7 +51,8 @@ public class AwardsController {
 	
 	@PatchMapping("/update")
 	public ResponseEntity<Response> updateAwards
-	(@RequestBody AwardsDto dto, @Param("artistId") Long artistId, @Param("awardsId") Long awardsId){
-		return this.updateAwards(dto, artistId, awardsId);
+	(@RequestBody AwardsDto dto, @Param("artistId") Long artistId, @Param("awardsId") Long awardsId)
+		throws ArtistNotFoundException, AwardsNotFoundException{
+		return this.service.updateAwards(awardsId, artistId, dto);
 	}
 }
