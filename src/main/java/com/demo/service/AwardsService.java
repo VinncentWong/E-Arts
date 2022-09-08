@@ -39,9 +39,12 @@ public class AwardsService {
 	}
 
 	public ResponseEntity<Response> createAwards(AwardsDto dto, Long artistId) throws ArtistNotFoundException{
+		log.info("awards dto = " + dto.getAwards());
 		Artist artist = artistRepo.findById(artistId).orElseThrow(() -> new ArtistNotFoundException());
 		Awards awards = new Awards();
 		awards.setArtistId(artist);
+		awards.setAwards(dto.getAwards());
+		awards = awardsRepo.save(awards);
 		return util.sendCreated("success create awards", true, awards);
 	}
 	

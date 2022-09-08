@@ -32,7 +32,7 @@ public class AwardsController {
 	}
 	
 	@PostMapping("/create/{artistId}")
-	public ResponseEntity<Response> createAwards(AwardsDto dto, @PathVariable("artistId") Long artistId) 
+	public ResponseEntity<Response> createAwards(@RequestBody AwardsDto dto, @PathVariable("artistId") Long artistId) 
 			throws ArtistNotFoundException{
 		return this.service.createAwards(dto, artistId);
 	}
