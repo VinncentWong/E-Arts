@@ -30,4 +30,11 @@ public class AboutService {
 		this.repository.save(artist);
 		return util.sendCreated("sukses menyimpan awards data", true, artist);
 	}
+	
+	public ResponseEntity<Response> getAbout(Long artistId) throws ArtistNotFoundException{
+		Artist artist = repository.findById(artistId).orElseThrow(() -> new ArtistNotFoundException());
+		return util.sendOk("sukses mendapatkan data about", true, artist.getAbout());
+	}
+	
+	
 }
