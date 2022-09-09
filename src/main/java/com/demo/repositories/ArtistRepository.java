@@ -20,4 +20,7 @@ public interface ArtistRepository extends CrudRepository<Artist, Long>{
 	
 	@Query(nativeQuery = true, value = "UPDATE artist SET about = ?1 WHERE id = ?2")
 	Optional<Artist> updateArtistAbout(String about, Long artistId);
+	
+	@Query(nativeQuery = true, value = "UPDATE artist SET biography = ?1 WHERE id = ?2")
+	Optional<Artist> createArtistBiography(String bio, Long artistId);
 }
