@@ -33,4 +33,16 @@ public class BiographyService {
 		Artist artist = this.repository.findById(artistId).orElseThrow(() -> new ArtistNotFoundException());
 		return util.sendOk("sukses mendapatkan data biography", true, artist.getBiography());
 	}
+	
+	public ResponseEntity<Response> updateBiography(Long artistId, BiographyDto dto) throws ArtistNotFoundException{
+		this.repository.findById(artistId).orElseThrow(() -> new ArtistNotFoundException());
+		this.repository.createArtistBiography(dto.getBiography(), artistId);
+		return util.sendOk("sukses mengupdate data biography", true, null);
+	}
+	
+	public ResponseEntity<Response> deleteBiography(Long artistId) throws ArtistNotFoundException{
+		this.repository.findById(artistId).orElseThrow(() -> new ArtistNotFoundException());
+		this.repository.createArtistBiography(null, artistId);
+		return util.sendOk("sukses menghapus data biography", true, null);
+	}
 }
