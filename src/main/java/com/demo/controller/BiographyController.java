@@ -30,7 +30,7 @@ public class BiographyController {
 	}
 	
 	@PostMapping("/create/{artistId}")
-	public ResponseEntity<Response> createBiography(@RequestBody @Valid BiographyDto dto, @PathVariable("id") Long id) throws ArtistNotFoundException{
+	public ResponseEntity<Response> createBiography(@RequestBody @Valid BiographyDto dto, @PathVariable("artistId") Long id) throws ArtistNotFoundException{
 		return this.service.createBiography(id, dto);
 	}
 	
