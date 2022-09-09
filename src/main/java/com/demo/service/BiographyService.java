@@ -17,6 +17,7 @@ public class BiographyService {
 	private final ArtistRepository repository;
 	
 	private final ResponseUtil util;
+	
 	@Autowired
 	public BiographyService(ArtistRepository repository, ResponseUtil util) {
 		this.repository = repository;
