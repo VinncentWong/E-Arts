@@ -36,5 +36,15 @@ public class AboutService {
 		return util.sendOk("sukses mendapatkan data about", true, artist.getAbout());
 	}
 	
+	public ResponseEntity<Response> updateAbout(Long artistId, AboutDto dto) throws ArtistNotFoundException{
+		this.repository.findById(artistId).orElseThrow(() -> new ArtistNotFoundException());
+		this.repository.updateArtistAbout(dto.getAbout(), artistId);
+		return util.sendOk("sukses update data about", true, null);
+	}
 	
+	public ResponseEntity<Response> deleteAbout(Long artistId) throws ArtistNotFoundException{
+		this.repository.findById(artistId).orElseThrow(() -> new ArtistNotFoundException());
+		this.repository.updateArtistAbout(null, artistId);
+		return util.sendOk("sukses menghapus data about", true, null);
+	}
 }
