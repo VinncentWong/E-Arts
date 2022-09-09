@@ -2,6 +2,7 @@ package com.demo.repositories;
 
 import java.util.Optional;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -19,11 +20,14 @@ public interface ArtistRepository extends CrudRepository<Artist, Long>{
 	Optional<Artist> getArtistByEmail(String email);
 	
 	@Query(nativeQuery = true, value = "UPDATE artist SET about = ?1 WHERE id = ?2")
+	@Modifying
 	Optional<Artist> updateArtistAbout(String about, Long artistId);
 	
 	@Query(nativeQuery = true, value = "UPDATE artist SET biography = ?1 WHERE id = ?2")
-	void createArtistBiography(String bio, Long artistId);
+	@Modifying
+	void updateArtistBiography(String bio, Long artistId);
 	
 	@Query(nativeQuery = true, value = "SELECT biography FROM artist WHERE id = ?1")
+	@Modifying
 	Optional<Artist> getBiographyByArtistId(Long artistId);
 }

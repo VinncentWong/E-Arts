@@ -1,5 +1,7 @@
 package com.demo.service;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,7 @@ import com.demo.repositories.ArtistRepository;
 import com.demo.util.ResponseUtil;
 
 @Service
+@Transactional
 public class BiographyService {
 	
 	private final ArtistRepository repository;
@@ -25,9 +28,10 @@ public class BiographyService {
 	}
 	
 	public ResponseEntity<Response> createBiography(Long artistId, BiographyDto dto) throws ArtistNotFoundException{
-		this.repository.findById(artistId).orElseThrow(() -> new ArtistNotFoundException());
-		Artist artist = this.repository.createArtistBiography(dto.getBiography(), artistId).get();
-		return util.sendCreated("sukses membuat biography", true, artist);
+		Artist artist = this.repository.findById(artistId).orElseThrow(() -> new ArtistNotFoundException());
+		artist.setBiography(dto.getBiography());
+		this.repository.updateArtistBiography(dto.getBiography(), artistId);
+		return util.sendCreated("sukses membuat biography", true, dto.getBiography());
 	}
 	
 	public ResponseEntity<Response> getBiography(Long artistId) throws ArtistNotFoundException{
@@ -37,13 +41,13 @@ public class BiographyService {
 	
 	public ResponseEntity<Response> updateBiography(Long artistId, BiographyDto dto) throws ArtistNotFoundException{
 		this.repository.findById(artistId).orElseThrow(() -> new ArtistNotFoundException());
-		this.repository.createArtistBiography(dto.getBiography(), artistId);
+		this.repository.updateArtistBiography(dto.getBiography(), artistId);
 		return util.sendOk("sukses mengupdate data biography", true, null);
 	}
 	
 	public ResponseEntity<Response> deleteBiography(Long artistId) throws ArtistNotFoundException{
 		this.repository.findById(artistId).orElseThrow(() -> new ArtistNotFoundException());
-		this.repository.createArtistBiography(null, artistId);
+		this.repository.updateArtistBiography(null, artistId);
 		return util.sendOk("sukses menghapus data biography", true, null);
 	}
 }
