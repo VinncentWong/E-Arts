@@ -1,5 +1,7 @@
 package com.demo.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -28,7 +30,7 @@ public class AboutController {
 	}
 	
 	@PostMapping("/create/{artistId}")
-	public ResponseEntity<Response> createAbout(@PathVariable("artistId") Long artistId, @RequestBody AboutDto dto) throws ArtistNotFoundException{
+	public ResponseEntity<Response> createAbout(@PathVariable("artistId") Long artistId, @RequestBody @Valid AboutDto dto) throws ArtistNotFoundException{
 		return this.service.createAbout(dto, artistId);
 	}
 	
@@ -38,7 +40,7 @@ public class AboutController {
 	}
 	
 	@PatchMapping("/update/{artistId}")
-	public ResponseEntity<Response> updateAbout(@PathVariable("artistId") Long artistId, @RequestBody AboutDto dto) throws ArtistNotFoundException{
+	public ResponseEntity<Response> updateAbout(@PathVariable("artistId") Long artistId, @RequestBody @Valid AboutDto dto) throws ArtistNotFoundException{
 		return this.service.updateAbout(artistId, dto);
 	}
 	

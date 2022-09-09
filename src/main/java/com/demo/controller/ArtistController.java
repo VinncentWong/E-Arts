@@ -50,7 +50,7 @@ public class ArtistController {
 	}
 	
 	@PostMapping("/addexpertise/{id}")
-	public ResponseEntity<Response> addArtistExpertise(@PathVariable Long id, @RequestBody ExpertiseDto dto) 
+	public ResponseEntity<Response> addArtistExpertise(@PathVariable Long id, @RequestBody @Valid ExpertiseDto dto) 
 			throws ArtistNotFoundException, ExpertiseNotFoundException{
 		return service.addArtistExpertise(id, dto);
 	}
@@ -74,7 +74,7 @@ public class ArtistController {
 	
 	@PatchMapping("/updateexpertise")
 	public ResponseEntity<Response> updateArtistExpertise
-			(@Param("idArtist") Long idArtist, @Param("idExpertise") Long idExpertise, @RequestBody ExpertiseDto dto) 
+			(@Param("idArtist") Long idArtist, @Param("idExpertise") Long idExpertise, @RequestBody @Valid ExpertiseDto dto) 
 			throws ArtistNotFoundException, ExpertiseNotFoundException{
 		return service.updateArtistExpertise(idExpertise, idArtist, dto);
 	}

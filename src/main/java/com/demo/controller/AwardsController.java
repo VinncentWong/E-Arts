@@ -1,5 +1,7 @@
 package com.demo.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +34,7 @@ public class AwardsController {
 	}
 	
 	@PostMapping("/create/{artistId}")
-	public ResponseEntity<Response> createAwards(@RequestBody AwardsDto dto, @PathVariable("artistId") Long artistId) 
+	public ResponseEntity<Response> createAwards(@RequestBody @Valid AwardsDto dto, @PathVariable("artistId") Long artistId) 
 			throws ArtistNotFoundException{
 		return this.service.createAwards(dto, artistId);
 	}
@@ -51,7 +53,7 @@ public class AwardsController {
 	
 	@PatchMapping("/update")
 	public ResponseEntity<Response> updateAwards
-	(@RequestBody AwardsDto dto, @Param("artistId") Long artistId, @Param("awardsId") Long awardsId)
+	(@RequestBody @Valid AwardsDto dto, @Param("artistId") Long artistId, @Param("awardsId") Long awardsId)
 		throws ArtistNotFoundException, AwardsNotFoundException{
 		return this.service.updateAwards(awardsId, artistId, dto);
 	}
