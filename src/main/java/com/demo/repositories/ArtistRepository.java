@@ -16,4 +16,7 @@ public interface ArtistRepository extends CrudRepository<Artist, Long>{
 	 */
 	@Query(nativeQuery = true, value = "SELECT * FROM artist WHERE email = ?1")
 	Optional<Artist> getArtistByEmail(String email);
+	
+	@Query(nativeQuery = true, value = "SELECT about FROM artist WHERE id = ?1")
+	Optional<Artist> getArtistAbout(Long artistId);
 }
