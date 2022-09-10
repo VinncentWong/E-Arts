@@ -1,5 +1,8 @@
 package com.demo.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -36,5 +39,15 @@ public class EducationalService {
 		this.educationalRepository.save(educational);
 		return this.util.sendCreated("sukses membuat educational", true, educational);
 	}
+	
+	public ResponseEntity<Response> getEducationals(Long artistId) throws ArtistNotFoundException{
+		this.artistRepository.findById(artistId).orElseThrow(() -> new ArtistNotFoundException());
+		Optional<List<Educational>> list = this.educationalRepository.getEducationalsByArtistId(artistId);
+		if(list.isEmpty()) {
+			return this.util.sendOk("data educational tidak ditemukan", true, null);
+		}
+		return this.util.sendOk("data educational ditemukan", true, list.get());
+	}
+	
 	
 }

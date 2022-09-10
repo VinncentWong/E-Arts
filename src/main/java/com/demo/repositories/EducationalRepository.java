@@ -14,4 +14,7 @@ public interface EducationalRepository extends CrudRepository<Educational, Long>
 	
 	@Query(nativeQuery = true, value = "SELECT * FROM educational WHERE artist_id_id = ?1")
 	Optional<List<Educational>> getEducationalsByArtistId(Long artistId);
+	
+	@Query(nativeQuery = true, value = "SELECT * FROM educational WHERE artist_id_id=?1 AND id = ?2")
+	Optional<Educational> getEducationalByArtistId(Long artistId, Long educationalId);
 }
