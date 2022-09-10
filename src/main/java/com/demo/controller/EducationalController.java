@@ -20,8 +20,11 @@ import com.demo.exception.ArtistNotFoundException;
 import com.demo.exception.EducationalNotFoundException;
 import com.demo.service.EducationalService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
 @RequestMapping("/educational")
+@Slf4j
 public class EducationalController {
 	
 	private final EducationalService service;
@@ -40,6 +43,8 @@ public class EducationalController {
 	@GetMapping("/get")
 	public ResponseEntity<Response> getEducational
 		(@Param("artistId") Long artistId, @Param("educationalId") Long educationalId) throws ArtistNotFoundException{
+		log.info("artistId = " + artistId);
+		log.info("educational id = " + educationalId);
 		return this.service.getEducational(artistId, artistId);
 	}
 	
