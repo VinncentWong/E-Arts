@@ -45,7 +45,7 @@ public class EducationalController {
 		(@Param("artistId") Long artistId, @Param("educationalId") Long educationalId) throws ArtistNotFoundException{
 		log.info("artistId = " + artistId);
 		log.info("educational id = " + educationalId);
-		return this.service.getEducational(artistId, artistId);
+		return this.service.getEducational(artistId, educationalId);
 	}
 	
 	@GetMapping("/gets/{artistId}")
