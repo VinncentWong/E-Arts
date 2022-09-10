@@ -17,4 +17,10 @@ public interface EducationalRepository extends CrudRepository<Educational, Long>
 	
 	@Query(nativeQuery = true, value = "SELECT * FROM educational WHERE artist_id_id=?1 AND id = ?2")
 	Optional<Educational> getEducationalByArtistId(Long artistId, Long educationalId);
+	
+	@Query(nativeQuery = true, value = "UPDATE educational SET education=?3 WHERE artist_id_id = ?1 AND id = ?2")
+	void updateEducational(Long artistId, Long educationalId, String educational);
+	
+	@Query(nativeQuery = true, value = "DELETE FROM educational WHERE artist_id_id = ?1 AND id = ?2")
+	void deleteEducational(Long artistId, Long educationalId);
 }

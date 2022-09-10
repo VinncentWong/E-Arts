@@ -49,5 +49,13 @@ public class EducationalService {
 		return this.util.sendOk("data educational ditemukan", true, list.get());
 	}
 	
+	public ResponseEntity<Response> getEducational(Long artistId, Long educationalId) throws ArtistNotFoundException{
+		this.artistRepository.findById(artistId).orElseThrow(() -> new ArtistNotFoundException());
+		Optional<Educational> education = this.educationalRepository.getEducationalByArtistId(artistId, educationalId);
+		if(education.isEmpty()) {
+			return this.util.sendOk("data educational tidak ditemukan", true, null);
+		} 
+		return this.util.sendOk("data educational ditemukan", true, education.get());
+	}
 	
 }
