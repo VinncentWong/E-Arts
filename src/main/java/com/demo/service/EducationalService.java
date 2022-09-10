@@ -12,6 +12,7 @@ import com.demo.domain.Educational;
 import com.demo.domain.Response;
 import com.demo.domain.dto.EducationalDto;
 import com.demo.exception.ArtistNotFoundException;
+import com.demo.exception.EducationalNotFoundException;
 import com.demo.repositories.ArtistRepository;
 import com.demo.repositories.EducationalRepository;
 import com.demo.util.ResponseUtil;
@@ -57,8 +58,20 @@ public class EducationalService {
 		} 
 		return this.util.sendOk("data educational ditemukan", true, education.get());
 	}
+
+	public ResponseEntity<Response> updateEducational(Long artistId, Long educationalId, EducationalDto dto) 
+			throws ArtistNotFoundException, EducationalNotFoundException{
+		this.artistRepository.findById(artistId).orElseThrow(() -> new ArtistNotFoundException());
+		this.educationalRepository.findById(educationalId).orElseThrow(() -> new EducationalNotFoundException());
+		this.educationalRepository.updateEducational(artistId, educationalId, dto.getEducational());
+		return this.util.sendOk("sukses mengupdate data educational", true, null);
+	}
 	
-	public ResponseEntity<Response> updateEducational(Long artistId, Long educationalId, EducationalDto dto) throws ArtistNotFoundException{
-		this.artistRepository.findById(educationalId).orElseThrow(() -> new ArtistNotFoundException());
+	public ResponseEntity<Response> deleteEducational(Long artistId, Long educationalId)
+			throws ArtistNotFoundException, EducationalNotFoundException{
+		this.artistRepository.findById(artistId).orElseThrow(() -> new ArtistNotFoundException());
+		this.educationalRepository.findById(educationalId).orElseThrow(() -> new EducationalNotFoundException());
+		this.educationalRepository.deleteEducational(artistId, educationalId);
+		return this.util.sendOk("sukses menghapus data educational", true, null);
 	}
 }
