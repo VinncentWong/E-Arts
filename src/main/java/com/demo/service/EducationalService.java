@@ -37,8 +37,9 @@ public class EducationalService {
 		Artist artist = this.artistRepository.findById(artistId).orElseThrow(() -> new ArtistNotFoundException());
 		Educational educational = new Educational();
 		educational.setArtistId(artist);
+		educational.setEducation(dto.getEducational());
 		this.educationalRepository.save(educational);
-		return this.util.sendCreated("sukses membuat educational", true, educational);
+		return this.util.sendCreated("sukses membuat educational", true, artist);
 	}
 	
 	public ResponseEntity<Response> getEducationals(Long artistId) throws ArtistNotFoundException{
