@@ -3,6 +3,8 @@ package com.demo.service;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -17,7 +19,11 @@ import com.demo.repositories.ArtistRepository;
 import com.demo.repositories.EducationalRepository;
 import com.demo.util.ResponseUtil;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Transactional
+@Slf4j
 public class EducationalService {
 
 	private final EducationalRepository educationalRepository;
@@ -54,6 +60,7 @@ public class EducationalService {
 	public ResponseEntity<Response> getEducational(Long artistId, Long educationalId) throws ArtistNotFoundException{
 		this.artistRepository.findById(artistId).orElseThrow(() -> new ArtistNotFoundException());
 		Optional<Educational> education = this.educationalRepository.getEducationalByArtistId(artistId, educationalId);
+		log.info("educational = " + education.get().getEducation());
 		if(education.isEmpty()) {
 			return this.util.sendOk("data educational tidak ditemukan", true, null);
 		} 
