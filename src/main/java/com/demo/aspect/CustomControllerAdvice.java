@@ -11,6 +11,7 @@ import com.demo.exception.AwardsNotFoundException;
 import com.demo.exception.EducationalNotFoundException;
 import com.demo.exception.ExpertiseNotFoundException;
 import com.demo.exception.InternalServerErrorException;
+import com.demo.exception.PublicationNotFoundException;
 import com.demo.util.ResponseUtil;
 
 @RestControllerAdvice
@@ -46,5 +47,10 @@ public class CustomControllerAdvice {
 	@ExceptionHandler(EducationalNotFoundException.class)
 	public ResponseEntity<Response> sendEducationalNotFoundException(){
 		return util.sendInternalServerError("data educational tidak ditemukan !", false);
+	}
+	
+	@ExceptionHandler(PublicationNotFoundException.class)
+	public ResponseEntity<Response> sendPublicationNotFoundException(){
+		return util.sendInternalServerError("data publication tidak ditemukan!", false);
 	}
 }
