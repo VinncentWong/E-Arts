@@ -20,8 +20,11 @@ import com.demo.exception.ArtistNotFoundException;
 import com.demo.exception.PublicationNotFoundException;
 import com.demo.service.PublicationsService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
 @RequestMapping("/publication")
+@Slf4j
 public class PublicationController {
 
 	private final PublicationsService service;
@@ -34,6 +37,7 @@ public class PublicationController {
 	@PostMapping("/create/{artistId}")
 	public ResponseEntity<Response> createPublication(@RequestBody @Valid PublicationDto dto, @PathVariable("artistId") Long artistId)
 		throws ArtistNotFoundException{
+		log.info("dto = " + dto.getPublication());
 		return this.service.createPublication(dto, artistId);
 	}
 	
