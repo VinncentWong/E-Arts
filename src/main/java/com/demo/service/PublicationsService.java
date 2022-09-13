@@ -37,4 +37,5 @@ public class PublicationsService {
 		this.repository.save(publication);
 		return util.sendCreated("sukses membuat publication", true, artist);
 	}
+	
 }
