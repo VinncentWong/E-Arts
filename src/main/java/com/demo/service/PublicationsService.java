@@ -1,5 +1,7 @@
 package com.demo.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -9,6 +11,7 @@ import com.demo.domain.Publications;
 import com.demo.domain.Response;
 import com.demo.domain.dto.PublicationDto;
 import com.demo.exception.ArtistNotFoundException;
+import com.demo.exception.PublicationNotFoundException;
 import com.demo.repositories.ArtistRepository;
 import com.demo.repositories.PublicationRepository;
 import com.demo.util.ResponseUtil;
@@ -36,6 +39,11 @@ public class PublicationsService {
 		publication.setArtist(artist);
 		this.repository.save(publication);
 		return util.sendCreated("sukses membuat publication", true, artist);
+	}
+	
+	public ResponseEntity<Response> getPublications(Long id) throws PublicationNotFoundException{
+		List<Publications> listPublications = this.repository.getPublications(id).orElseThrow(() -> new PublicationNotFoundException());
+		return util.sendOk("success find publications data", true, listPublications);
 	}
 	
 }
