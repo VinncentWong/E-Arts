@@ -29,7 +29,7 @@ public class SocialMediaController {
 		this.service = service;
 	}
 	
-	@PostMapping("/create")
+	@PostMapping("/create/{artistId}")
 	public ResponseEntity<Response> createSocialMedia(@PathVariable("artistId") Long artistId, @RequestBody @Valid SocialMediaDto dto) 
 			throws ArtistNotFoundException {
 		return this.service.createSocialMedia(dto, artistId);
