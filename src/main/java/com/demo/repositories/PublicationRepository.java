@@ -16,5 +16,5 @@ public interface PublicationRepository extends CrudRepository<Publications, Long
 	public Optional<List<Publications>> getPublications(Long id);
 	
 	@Query(nativeQuery = true, value = "SELECT * FROM publications WHERE artist_id = ?1 AND id = ?2")
-	public Publications getPublication(Long artistId, Long publicationId);
+	public Optional<Publications> getPublication(Long artistId, Long publicationId);
 }
