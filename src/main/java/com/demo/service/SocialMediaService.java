@@ -37,6 +37,7 @@ public class SocialMediaService {
 		SocialMedia socialMedia = new SocialMedia();
 		Artist artist = this.artistRepository.findById(artistId).orElseThrow(() -> new ArtistNotFoundException());
 		socialMedia.setArtist(artist);
+		socialMedia.setSocialMedia(dto.getSocialMedia());
 		this.repository.save(socialMedia);
 		return util.sendCreated("sukses membuat social media", true, artist);
 	}
