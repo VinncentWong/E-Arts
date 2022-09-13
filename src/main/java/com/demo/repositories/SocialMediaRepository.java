@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.demo.domain.SocialMedia;
 
 @Repository
-public interface SocialMediaRepository extends CrudRepository<SocialMedia, Long>{}
+public interface SocialMediaRepository extends CrudRepository<SocialMedia, Long>{
+	
+}
