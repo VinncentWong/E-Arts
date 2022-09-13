@@ -43,7 +43,13 @@ public class PublicationsService {
 	
 	public ResponseEntity<Response> getPublications(Long id) throws PublicationNotFoundException{
 		List<Publications> listPublications = this.repository.getPublications(id).orElseThrow(() -> new PublicationNotFoundException());
-		return util.sendOk("success find publications data", true, listPublications);
+		return util.sendOk("success menemukan data publications", true, listPublications);
 	}
 	
+	public ResponseEntity<Response> getPublication(Long artistId, Long publicationId) 
+			throws PublicationNotFoundException, ArtistNotFoundException{
+		this.artistRepository.findById(artistId).orElseThrow(() -> new ArtistNotFoundException());
+		Publications publication = this.repository.getPublication(artistId, publicationId).orElseThrow(() -> new PublicationNotFoundException());
+		return util.sendOk("sukses menemukan data publication", false, publication);
+	}
 }
