@@ -53,4 +53,7 @@ public class PersonalInformationService {
 		return this.util.sendCreated("sukses membuat personal information", true, artist);
 	}
 
+	public ResponseEntity<Response> getPersonalInformation(Long artistId){
+		return null;
+	}
 }
