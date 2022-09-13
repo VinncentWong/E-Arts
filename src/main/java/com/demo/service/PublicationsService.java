@@ -52,4 +52,14 @@ public class PublicationsService {
 		Publications publication = this.repository.getPublication(artistId, publicationId).orElseThrow(() -> new PublicationNotFoundException());
 		return util.sendOk("sukses menemukan data publication", false, publication);
 	}
+	
+	public ResponseEntity<Response> updatePublication(Long artistId, Long publicationId, PublicationDto dto)
+		throws ArtistNotFoundException, PublicationNotFoundException{
+		this.artistRepository.findById(artistId).orElseThrow(() -> new ArtistNotFoundException());
+		this.repository.getPublication(artistId, publicationId).orElseThrow(() -> new PublicationNotFoundException());
+		this.repository.updatePublication(artistId, publicationId, dto.getPublication());
+		return util.sendOk("data publication sukses diupdate", true, null);
+	}
+	
+	
 }
