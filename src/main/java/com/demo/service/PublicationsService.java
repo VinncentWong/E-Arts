@@ -61,5 +61,11 @@ public class PublicationsService {
 		return util.sendOk("data publication sukses diupdate", true, null);
 	}
 	
-	
+	public ResponseEntity<Response> deletePublication(Long artistId, Long publicationId)
+			throws ArtistNotFoundException, PublicationNotFoundException{
+		this.artistRepository.findById(artistId).orElseThrow(() -> new ArtistNotFoundException());
+		this.repository.getPublication(artistId, publicationId).orElseThrow(() -> new PublicationNotFoundException());
+		this.repository.deletePublication(artistId, publicationId);
+		return util.sendOk("data publication sukses dihapus", true, null);
+	}
 }
