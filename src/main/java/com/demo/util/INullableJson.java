@@ -1,5 +1,5 @@
 package com.demo.util;
 
-public interface NullableJson{
+public interface INullableJson{
 	public void setIfPresent(Object data);
 }
