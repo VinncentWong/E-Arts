@@ -16,7 +16,10 @@ import com.demo.repositories.ArtistRepository;
 import com.demo.repositories.SocialMediaRepository;
 import com.demo.util.ResponseUtil;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class SocialMediaService {
 
 	private final SocialMediaRepository repository;
@@ -48,6 +51,7 @@ public class SocialMediaService {
 	}
 	
 	public ResponseEntity<Response> getSocialMedia(Long artistId, Long socialMediaId) throws SocialMediaNotFoundException{
+		log.info("artist id = " + artistId + " social media id = " + socialMediaId);
 		SocialMedia sosmed = this.repository.getSocialMedia(artistId, socialMediaId).orElseThrow(() -> new SocialMediaNotFoundException());
 		return this.util.sendOk("sukses mendapatkan data social media", true, sosmed);
 	}
