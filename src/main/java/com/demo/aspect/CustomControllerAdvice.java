@@ -12,6 +12,7 @@ import com.demo.exception.EducationalNotFoundException;
 import com.demo.exception.ExpertiseNotFoundException;
 import com.demo.exception.InternalServerErrorException;
 import com.demo.exception.PublicationNotFoundException;
+import com.demo.exception.SocialMediaNotFoundException;
 import com.demo.util.ResponseUtil;
 
 @RestControllerAdvice
@@ -52,5 +53,10 @@ public class CustomControllerAdvice {
 	@ExceptionHandler(PublicationNotFoundException.class)
 	public ResponseEntity<Response> sendPublicationNotFoundException(){
 		return util.sendInternalServerError("data publication tidak ditemukan!", false);
+	}
+	
+	@ExceptionHandler(SocialMediaNotFoundException.class)
+	public ResponseEntity<Response> sendSocialMediaNotFound(){
+		return util.sendInternalServerError("data social media tidak ditemukan", false);
 	}
 }
