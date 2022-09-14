@@ -75,6 +75,7 @@ public class PersonalInformationService {
 	}
 	
 	public ResponseEntity<Response> updatePersonalInformation(Long artistId, PersonalInformationDto dto, Long personalInformationId) throws PersonalInformationNotFoundException{
+		Artist artist = this.artistRepository.findById(artistId).orElseThrow(() -> new ArtistNotFoundException());
 		PersonalInformation personalInformation = this.repository.findById(personalInformationId).orElseThrow(() -> new PersonalInformationNotFoundException());
 		try(SqlSession session = this.session.openSession()){
 			PersonalInformationMapper mapper = session.getMapper(PersonalInformationMapper.class);
@@ -100,5 +101,12 @@ public class PersonalInformationService {
 			String format = String.format("terjadi exception dengan pesan %s", ex.getMessage());
 			return util.sendBadRequest(format, false);
 		}
+	}
+	
+	public ResponseEntity<Response> removePersonalInformation(Long personalInformationId, Long artistId) 
+			throws ArtistNotFoundException, PersonalInformationNotFoundException{
+		Artist artist = this.artistRepository.findById(artistId).orElseThrow(() -> new ArtistNotFoundException());
+		PersonalInformation personalInformation = this.repository.findById(personalInformationId).orElseThrow(() -> new PersonalInformationNotFoundException());
+		return null;
 	}
 }
