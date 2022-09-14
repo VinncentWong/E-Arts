@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -68,4 +69,7 @@ public class Artist implements Human{
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "artist")
 	private List<SocialMedia> socialMedia;
+	
+	@OneToOne(mappedBy = "artist")
+	private PersonalInformation personalInformation;
 }
