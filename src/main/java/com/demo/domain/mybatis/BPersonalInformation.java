@@ -6,6 +6,7 @@ import java.util.Date;
 import org.mybatis.dynamic.sql.SqlColumn;
 import org.mybatis.dynamic.sql.SqlTable;
 
+import com.demo.domain.Artist;
 import com.demo.domain.Gender;
 
 import lombok.Getter;
@@ -14,6 +15,8 @@ import lombok.Setter;
 @Setter
 @Getter
 public class BPersonalInformation extends SqlTable{
+	
+	private SqlColumn<Long> id = column("id", JDBCType.BIGINT);
 
 	private SqlColumn<String> phoneNumber = column("phone_number", JDBCType.VARCHAR);
 	
@@ -38,6 +41,8 @@ public class BPersonalInformation extends SqlTable{
 	private SqlColumn<Gender> gender = column("gender", JDBCType.VARCHAR);
 	
 	private SqlColumn<Boolean> isGenderPrivate = column("is_date_birth_private", JDBCType.BOOLEAN);
+	
+	private SqlColumn<Artist> artist = column("artist_id", JDBCType.BIGINT);
 	
 	protected BPersonalInformation() {
 		super("personal_information");

@@ -1,12 +1,16 @@
 package com.demo.service;
 
-import static org.mybatis.dynamic.sql.SqlBuilder.*;
+import static org.mybatis.dynamic.sql.SqlBuilder.update;
+import static org.mybatis.dynamic.sql.SqlBuilder.isEqualTo;
 
 import javax.transaction.Transactional;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.dynamic.sql.SqlColumn;
+import org.mybatis.dynamic.sql.render.RenderingStrategies;
 import org.mybatis.dynamic.sql.update.render.UpdateStatementProvider;
+import org.mybatis.dynamic.sql.where.condition.IsEqualTo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -15,6 +19,8 @@ import com.demo.domain.Artist;
 import com.demo.domain.PersonalInformation;
 import com.demo.domain.Response;
 import com.demo.domain.dto.PersonalInformationDto;
+import com.demo.domain.mybatis.BPersonalInformation;
+import com.demo.domain.mybatis.SubClassBPersonalInformation;
 import com.demo.exception.ArtistNotFoundException;
 import com.demo.exception.PersonalInformationNotFoundException;
 import com.demo.mapper.PersonalInformationMapper;
@@ -72,6 +78,21 @@ public class PersonalInformationService {
 		PersonalInformation personalInformation = this.repository.findById(personalInformationId).orElseThrow(() -> new PersonalInformationNotFoundException());
 		try(SqlSession session = this.session.openSession()){
 			PersonalInformationMapper mapper = session.getMapper(PersonalInformationMapper.class);
+			SubClassBPersonalInformation subPersonal = new SubClassBPersonalInformation();
+			UpdateStatementProvider statement = update(subPersonal)
+												.set(subPersonal.getAddress()).equalToWhenPresent(() -> dto.getAddress())
+												.set(subPersonal.getCity()).equalToWhenPresent(() -> dto.getCity())
+												.set(subPersonal.getDateBirth()).equalToWhenPresent(() -> dto.getDateBirth())
+												.set(subPersonal.getGender()).equalToWhenPresent(() -> dto.getGender())
+												.set(subPersonal.getIsAddressPrivate()).equalToWhenPresent(() -> dto.getIsAddressPrivate())
+												.set(subPersonal.getIsCityPrivate()).equalToWhenPresent(() -> dto.getIsCityPrivate())
+												.set(subPersonal.getIsDateBirthPrivate()).equalToWhenPresent(() -> dto.getIsDateBirthPrivate())
+												.set(subPersonal.getIsGenderPrivate()).equalToWhenPresent(() -> dto.getIsGenderPrivate())
+												.set(subPersonal.getIsPhoneNumberPrivate()).equalToWhenPresent(() -> dto.getIsPhoneNumberPrivate())
+												.set(subPersonal.getIsProvincePrivate()).equalToWhenPresent(() -> dto.getIsProvincePrivate())
+												.where(subPersonal.getId(), isEqualTo(() -> personalInformation.getId()))
+												.build()
+												.render(RenderingStrategies.MYBATIS3);
 			return null;
 		}
 		catch(Exception ex) {
