@@ -16,6 +16,6 @@ public interface PersonalInformationRepository extends CrudRepository<PersonalIn
 	@Query(nativeQuery = true, value = "SELECT * FROM personal_information WHERE artist_id = ?1")
 	Optional<PersonalInformation> getPersonalInformationByArtistId(Long id);
 	
-	@Query(nativeQuery = true, value = "DELETE FROM personal_information WHERE artist_id = ?1 AND id = ?2")
-	void deletePersonalInformation(Long artistId, Long id);
+	@Query(nativeQuery = true, value = "DELETE FROM personal_information WHERE id = ?2")
+	void deletePersonalInformation(Long id);
 }

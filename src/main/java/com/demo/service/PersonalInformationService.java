@@ -104,7 +104,7 @@ public class PersonalInformationService {
 	public ResponseEntity<Response> removePersonalInformation(Long personalInformationId) 
 			throws ArtistNotFoundException, PersonalInformationNotFoundException{
 		this.repository.findById(personalInformationId).orElseThrow(() -> new PersonalInformationNotFoundException());
-		this.repository.deletePersonalInformation(artistId, personalInformationId);
+		this.repository.deletePersonalInformation(personalInformationId);
 		return util.sendOk("sukses menghapus data personal information", true, null);
 	}
 }
