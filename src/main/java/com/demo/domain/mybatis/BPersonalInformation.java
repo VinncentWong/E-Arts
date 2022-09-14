@@ -44,3 +44,5 @@ public class BPersonalInformation extends SqlTable{
 	}
 
 }
+
+class SubClassBPersonalInformation extends BPersonalInformation{}
