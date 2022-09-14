@@ -71,9 +71,8 @@ public class PersonalInformationService {
 		return this.util.sendOk("sukses menemukan data personal information", true, personalInformation);
 	}
 	
-	public ResponseEntity<Response> updatePersonalInformation(Long artistId, PersonalInformationDto dto, Long personalInformationId) 
+	public ResponseEntity<Response> updatePersonalInformation(PersonalInformationDto dto, Long personalInformationId) 
 			throws PersonalInformationNotFoundException, ArtistNotFoundException{
-		this.artistRepository.findById(artistId).orElseThrow(() -> new ArtistNotFoundException());
 		PersonalInformation personalInformation = this.repository.findById(personalInformationId).orElseThrow(() -> new PersonalInformationNotFoundException());
 		try(SqlSession session = this.session.openSession()){
 			PersonalInformationMapper mapper = session.getMapper(PersonalInformationMapper.class);
