@@ -7,10 +7,8 @@ import javax.transaction.Transactional;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.mybatis.dynamic.sql.SqlColumn;
 import org.mybatis.dynamic.sql.render.RenderingStrategies;
 import org.mybatis.dynamic.sql.update.render.UpdateStatementProvider;
-import org.mybatis.dynamic.sql.where.condition.IsEqualTo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -19,7 +17,6 @@ import com.demo.domain.Artist;
 import com.demo.domain.PersonalInformation;
 import com.demo.domain.Response;
 import com.demo.domain.dto.PersonalInformationDto;
-import com.demo.domain.mybatis.BPersonalInformation;
 import com.demo.domain.mybatis.SubClassBPersonalInformation;
 import com.demo.exception.ArtistNotFoundException;
 import com.demo.exception.PersonalInformationNotFoundException;
@@ -108,6 +105,7 @@ public class PersonalInformationService {
 			throws ArtistNotFoundException, PersonalInformationNotFoundException{
 		this.artistRepository.findById(artistId).orElseThrow(() -> new ArtistNotFoundException());
 		this.repository.findById(personalInformationId).orElseThrow(() -> new PersonalInformationNotFoundException());
-		return null;
+		this.repository.deletePersonalInformation(artistId, personalInformationId);
+		return util.sendOk("sukses menghapus data personal information", true, null);
 	}
 }
