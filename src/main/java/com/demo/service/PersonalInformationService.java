@@ -1,7 +1,12 @@
 package com.demo.service;
 
+import static org.mybatis.dynamic.sql.SqlBuilder.*;
+
 import javax.transaction.Transactional;
 
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.dynamic.sql.update.render.UpdateStatementProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -12,6 +17,7 @@ import com.demo.domain.Response;
 import com.demo.domain.dto.PersonalInformationDto;
 import com.demo.exception.ArtistNotFoundException;
 import com.demo.exception.PersonalInformationNotFoundException;
+import com.demo.mapper.PersonalInformationMapper;
 import com.demo.repositories.ArtistRepository;
 import com.demo.repositories.PersonalInformationRepository;
 import com.demo.util.ResponseUtil;
@@ -26,11 +32,14 @@ public class PersonalInformationService {
 	
 	private final ResponseUtil util;
 	
+	private final SqlSessionFactory session;
+	
 	@Autowired
-	public PersonalInformationService(PersonalInformationRepository repository, ArtistRepository artistRepository, ResponseUtil util) {
+	public PersonalInformationService(PersonalInformationRepository repository, ArtistRepository artistRepository, ResponseUtil util, SqlSessionFactory session) {
 		this.repository = repository;
 		this.artistRepository = artistRepository;
 		this.util = util;
+		this.session = session;
 	}
 	
 	public ResponseEntity<Response> createPersonalInformation(PersonalInformationDto dto, Long artistId)
@@ -61,41 +70,12 @@ public class PersonalInformationService {
 	
 	public ResponseEntity<Response> updatePersonalInformation(Long artistId, PersonalInformationDto dto, Long personalInformationId) throws PersonalInformationNotFoundException{
 		PersonalInformation personalInformation = this.repository.findById(personalInformationId).orElseThrow(() -> new PersonalInformationNotFoundException());
-		if(dto.getAddress() != null) {
-			personalInformation.setAddress(dto.getAddress());
+		try(SqlSession session = this.session.openSession()){
+			PersonalInformationMapper mapper = session.getMapper(PersonalInformationMapper.class);
+			return null;
 		}
-		if(dto.getCity() != null) {
-			personalInformation.setCity(dto.getCity());
-		}
-		if(dto.getDateBirth() != null) {
-			personalInformation.setDateBirth(dto.getDateBirth());
-		}
-		if(dto.getGender() != null) {
-			personalInformation.setGender(dto.getGender());
-		}
-		if(dto.getPhoneNumber() != null) {
-			personalInformation.setPhoneNumber(dto.getPhoneNumber());
-		}
-		if(dto.getProvince() != null) {
-			personalInformation.setProvince(dto.getProvince());
-		}
-		if(dto.getIsAddressPrivate() != null) {
-			personalInformation.setAddressPrivate(dto.getIsAddressPrivate());
-		}
-		if(dto.getIsCityPrivate() != null) {
-			personalInformation.setCityPrivate(dto.getIsCityPrivate());
-		}
-		if(dto.getIsDateBirthPrivate() != null) {
-			personalInformation.setDateBirthPrivate(dto.getIsDateBirthPrivate());
-		}
-		if(dto.getIsGenderPrivate() != null) {
-			personalInformation.setGenderPrivate(dto.getIsGenderPrivate());
-		}
-		if(dto.getIsPhoneNumberPrivate() != null) {
-			personalInformation.setPhoneNumberPrivate(dto.getIsPhoneNumberPrivate());
-		}
-		if(dto.getIsProvincePrivate() != null) {
-			personalInformation.setProvincePrivate(dto.getIsProvincePrivate());
+		catch(Exception ex) {
+			
 		}
 		return this.util.sendOk("sukses mengupdate data personal information", true, null);
 	}
