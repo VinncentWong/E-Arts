@@ -74,8 +74,9 @@ public class PersonalInformationService {
 		return this.util.sendOk("sukses menemukan data personal information", true, personalInformation);
 	}
 	
-	public ResponseEntity<Response> updatePersonalInformation(Long artistId, PersonalInformationDto dto, Long personalInformationId) throws PersonalInformationNotFoundException{
-		Artist artist = this.artistRepository.findById(artistId).orElseThrow(() -> new ArtistNotFoundException());
+	public ResponseEntity<Response> updatePersonalInformation(Long artistId, PersonalInformationDto dto, Long personalInformationId) 
+			throws PersonalInformationNotFoundException, ArtistNotFoundException{
+		this.artistRepository.findById(artistId).orElseThrow(() -> new ArtistNotFoundException());
 		PersonalInformation personalInformation = this.repository.findById(personalInformationId).orElseThrow(() -> new PersonalInformationNotFoundException());
 		try(SqlSession session = this.session.openSession()){
 			PersonalInformationMapper mapper = session.getMapper(PersonalInformationMapper.class);
@@ -105,8 +106,8 @@ public class PersonalInformationService {
 	
 	public ResponseEntity<Response> removePersonalInformation(Long personalInformationId, Long artistId) 
 			throws ArtistNotFoundException, PersonalInformationNotFoundException{
-		Artist artist = this.artistRepository.findById(artistId).orElseThrow(() -> new ArtistNotFoundException());
-		PersonalInformation personalInformation = this.repository.findById(personalInformationId).orElseThrow(() -> new PersonalInformationNotFoundException());
+		this.artistRepository.findById(artistId).orElseThrow(() -> new ArtistNotFoundException());
+		this.repository.findById(personalInformationId).orElseThrow(() -> new PersonalInformationNotFoundException());
 		return null;
 	}
 }
