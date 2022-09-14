@@ -2,6 +2,7 @@ package com.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,7 +42,13 @@ public class PersonalInformationController {
 	
 	@PatchMapping("/update/{artistId}")
 	public ResponseEntity<Response> updatePersonalInformation(@PathVariable("artistId") Long artistId, @RequestBody PersonalInformationDto dto)
-			throws ArtistNotFoundException{
+			throws ArtistNotFoundException, PersonalInformationNotFoundException{
 		return this.service.updatePersonalInformation(dto, artistId);
+	}
+	
+	@DeleteMapping("/delete/{artistId}")
+	public ResponseEntity<Response> deletePersonalInformation(@PathVariable("artistId") Long artistId) 
+			throws ArtistNotFoundException, PersonalInformationNotFoundException{
+		return this.service.removePersonalInformation(artistId);
 	}
 }
