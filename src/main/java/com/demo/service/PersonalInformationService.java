@@ -93,11 +93,12 @@ public class PersonalInformationService {
 												.where(subPersonal.getId(), isEqualTo(() -> personalInformation.getId()))
 												.build()
 												.render(RenderingStrategies.MYBATIS3);
-			return null;
+			int rows = mapper.update(statement);
+			return util.sendOk("sukses mengupdate data personal information", true, null);
 		}
 		catch(Exception ex) {
-			
+			String format = String.format("terjadi exception dengan pesan %s", ex.getMessage());
+			return util.sendBadRequest(format, false);
 		}
-		return this.util.sendOk("sukses mengupdate data personal information", true, null);
 	}
 }
