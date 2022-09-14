@@ -13,7 +13,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class PersonalInformation extends SqlTable{
+public class BPersonalInformation extends SqlTable{
 
 	private SqlColumn<String> phoneNumber = column("phone_number", JDBCType.VARCHAR);
 	
@@ -39,7 +39,7 @@ public class PersonalInformation extends SqlTable{
 	
 	private SqlColumn<Boolean> isGenderPrivate = column("is_date_birth_private", JDBCType.BOOLEAN);
 	
-	protected PersonalInformation() {
+	protected BPersonalInformation() {
 		super("personal_information");
 	}
 
