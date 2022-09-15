@@ -15,6 +15,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
@@ -23,6 +25,7 @@ import lombok.ToString;
 @Entity
 @Data
 @ToString(exclude = "artist")
+@DynamicUpdate(value = true)
 public class PersonalInformation {
 
 	@Id

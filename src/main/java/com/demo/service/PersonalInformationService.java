@@ -26,8 +26,11 @@ import com.demo.repositories.ArtistRepository;
 import com.demo.repositories.PersonalInformationRepository;
 import com.demo.util.ResponseUtil;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
 @Transactional
+@Slf4j
 public class PersonalInformationService {
 
 	private final PersonalInformationRepository repository;
@@ -75,30 +78,7 @@ public class PersonalInformationService {
 	public ResponseEntity<Response> updatePersonalInformation(PersonalInformationDto dto, Long personalInformationId) 
 			throws PersonalInformationNotFoundException, ArtistNotFoundException{
 		PersonalInformation personalInformation = this.repository.findById(personalInformationId).orElseThrow(() -> new PersonalInformationNotFoundException());
-		try(SqlSession session = this.session.openSession()){
-			PersonalInformationMapper mapper = session.getMapper(PersonalInformationMapper.class);
-			SubClassBPersonalInformation subPersonal = new SubClassBPersonalInformation();
-			UpdateStatementProvider statement = update(subPersonal)
-												.set(subPersonal.getAddress()).equalToWhenPresent(() -> dto.getAddress())
-												.set(subPersonal.getCity()).equalToWhenPresent(() -> dto.getCity())
-												.set(subPersonal.getDateBirth()).equalToWhenPresent(() -> dto.getDateBirth())
-												.set(subPersonal.getGender()).equalToWhenPresent(() -> dto.getGender())
-												.set(subPersonal.getIsAddressPrivate()).equalToWhenPresent(() -> dto.getIsAddressPrivate())
-												.set(subPersonal.getIsCityPrivate()).equalToWhenPresent(() -> dto.getIsCityPrivate())
-												.set(subPersonal.getIsDateBirthPrivate()).equalToWhenPresent(() -> dto.getIsDateBirthPrivate())
-												.set(subPersonal.getIsGenderPrivate()).equalToWhenPresent(() -> dto.getIsGenderPrivate())
-												.set(subPersonal.getIsPhoneNumberPrivate()).equalToWhenPresent(() -> dto.getIsPhoneNumberPrivate())
-												.set(subPersonal.getIsProvincePrivate()).equalToWhenPresent(() -> dto.getIsProvincePrivate())
-												.where(subPersonal.getId(), isEqualTo(() -> personalInformation.getId()))
-												.build()
-												.render(RenderingStrategies.MYBATIS3);
-			int rows = mapper.update(statement);
-			return util.sendOk("sukses mengupdate data personal information", true, null);
-		}
-		catch(Exception ex) {
-			String format = String.format("terjadi exception dengan pesan %s", ex.getMessage());
-			return util.sendBadRequest(format, false);
-		}
+		return null;
 	}
 	
 	public ResponseEntity<Response> removePersonalInformation(Long personalInformationId) 
