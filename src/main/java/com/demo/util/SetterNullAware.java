@@ -7,22 +7,22 @@ import com.demo.domain.Gender;
 
 public class SetterNullAware<T>{
 
-	public void setNumber(Consumer<? super Number> consumer, T object, Number data) {
+	public void setNumber(Consumer<? super Number> consumer, Number data) {
 		if(data != null)
 			consumer.accept(data);
 	}
 	
-	public void setBoolean(Consumer<? super Boolean> consumer, T object, Boolean data) {
+	public void setBoolean(Consumer<? super Boolean> consumer, Boolean data) {
 		if(data != null)
 			consumer.accept(data);
 	}
 	
-	public void setDate(Consumer<? super Date> consumer, T object,  Date data) {
+	public void setDate(Consumer<? super Date> consumer, Date data) {
 		if(data != null)
 			consumer.accept(data);
 	}
 	
-	public void setString(Consumer<? super String> consumer, T object, String data) {
+	public void setString(Consumer<? super String> consumer, String data) {
 		if(data != null)
 			consumer.accept(data);
 	}
