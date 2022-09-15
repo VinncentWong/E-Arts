@@ -62,7 +62,20 @@ public class PersonalInformationService {
 	public ResponseEntity<Response> updatePersonalInformation(PersonalInformationDto dto, Long personalInformationId) 
 			throws PersonalInformationNotFoundException, ArtistNotFoundException{
 		PersonalInformation personalInformation = this.repository.findById(personalInformationId).orElseThrow(() -> new PersonalInformationNotFoundException());
-		return null;
+		personalInformation.setAddress(dto.getAddress());
+		personalInformation.setAddressPrivate(dto.getIsAddressPrivate());
+		personalInformation.setCity(dto.getCity());
+		personalInformation.setCityPrivate(dto.getIsCityPrivate());
+		personalInformation.setDateBirth(dto.getDateBirth());
+		personalInformation.setDateBirthPrivate(dto.getIsDateBirthPrivate());
+		personalInformation.setGender(dto.getGender());
+		personalInformation.setGenderPrivate(dto.getIsGenderPrivate());
+		personalInformation.setPhoneNumber(dto.getPhoneNumber());
+		personalInformation.setPhoneNumberPrivate(dto.getIsPhoneNumberPrivate());
+		personalInformation.setProvince(dto.getProvince());
+		personalInformation.setProvincePrivate(dto.getIsProvincePrivate());
+		this.repository.save(personalInformation);
+		return this.util.sendOk("sukses mengupdate data personal information", true, null);
 	}
 	
 	public ResponseEntity<Response> removePersonalInformation(Long personalInformationId) 
