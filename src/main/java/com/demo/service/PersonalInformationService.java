@@ -1,15 +1,7 @@
 package com.demo.service;
 
-import static org.mybatis.dynamic.sql.SqlBuilder.update;
-import static org.mybatis.dynamic.sql.SqlBuilder.isEqualTo;
-
 import javax.transaction.Transactional;
 
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.mybatis.dynamic.sql.SqlColumn;
-import org.mybatis.dynamic.sql.render.RenderingStrategies;
-import org.mybatis.dynamic.sql.update.render.UpdateStatementProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -18,19 +10,14 @@ import com.demo.domain.Artist;
 import com.demo.domain.PersonalInformation;
 import com.demo.domain.Response;
 import com.demo.domain.dto.PersonalInformationDto;
-import com.demo.domain.mybatis.SubClassBPersonalInformation;
 import com.demo.exception.ArtistNotFoundException;
 import com.demo.exception.PersonalInformationNotFoundException;
-import com.demo.mapper.PersonalInformationMapper;
 import com.demo.repositories.ArtistRepository;
 import com.demo.repositories.PersonalInformationRepository;
 import com.demo.util.ResponseUtil;
 
-import lombok.extern.slf4j.Slf4j;
-
 @Service
 @Transactional
-@Slf4j
 public class PersonalInformationService {
 
 	private final PersonalInformationRepository repository;
@@ -39,14 +26,11 @@ public class PersonalInformationService {
 	
 	private final ResponseUtil util;
 	
-	private final SqlSessionFactory session;
-	
 	@Autowired
-	public PersonalInformationService(PersonalInformationRepository repository, ArtistRepository artistRepository, ResponseUtil util, SqlSessionFactory session) {
+	public PersonalInformationService(PersonalInformationRepository repository, ArtistRepository artistRepository, ResponseUtil util) {
 		this.repository = repository;
 		this.artistRepository = artistRepository;
 		this.util = util;
-		this.session = session;
 	}
 	
 	public ResponseEntity<Response> createPersonalInformation(PersonalInformationDto dto, Long artistId)
