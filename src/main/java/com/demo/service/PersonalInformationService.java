@@ -64,18 +64,18 @@ public class PersonalInformationService {
 			throws PersonalInformationNotFoundException, ArtistNotFoundException{
 		SetterNullAware<PersonalInformation> setter = new SetterNullAware<>();
 		PersonalInformation personalInformation = this.repository.findById(personalInformationId).orElseThrow(() -> new PersonalInformationNotFoundException());
-		setter.setString(personalInformation::setAddress, personalInformation, dto.getAddress());
-		setter.setBoolean(personalInformation::setAddressPrivate, personalInformation, dto.getIsAddressPrivate());
-		setter.setString(personalInformation::setCity, personalInformation, dto.getCity());
-		setter.setBoolean(personalInformation::setCityPrivate, personalInformation, dto.getIsCityPrivate());
-		setter.setDate(personalInformation::setDateBirth, personalInformation, dto.getDateBirth());
-		setter.setBoolean(personalInformation::setDateBirthPrivate, personalInformation, dto.getIsDateBirthPrivate());
+		setter.setString(personalInformation::setAddress, dto.getAddress());
+		setter.setBoolean(personalInformation::setAddressPrivate,  dto.getIsAddressPrivate());
+		setter.setString(personalInformation::setCity, dto.getCity());
+		setter.setBoolean(personalInformation::setCityPrivate, dto.getIsCityPrivate());
+		setter.setDate(personalInformation::setDateBirth, dto.getDateBirth());
+		setter.setBoolean(personalInformation::setDateBirthPrivate, dto.getIsDateBirthPrivate());
 		setter.setGender(personalInformation::setGender, dto.getGender());
-		setter.setBoolean(personalInformation::setGenderPrivate, personalInformation, dto.getIsGenderPrivate());
-		setter.setString(personalInformation::setPhoneNumber, personalInformation, dto.getPhoneNumber());
-		setter.setBoolean(personalInformation::setPhoneNumberPrivate, personalInformation, dto.getIsPhoneNumberPrivate());
-		setter.setString(personalInformation::setProvince, personalInformation, dto.getProvince());
-		setter.setBoolean(personalInformation::setProvincePrivate, personalInformation, dto.getIsProvincePrivate());
+		setter.setBoolean(personalInformation::setGenderPrivate, dto.getIsGenderPrivate());
+		setter.setString(personalInformation::setPhoneNumber, dto.getPhoneNumber());
+		setter.setBoolean(personalInformation::setPhoneNumberPrivate, dto.getIsPhoneNumberPrivate());
+		setter.setString(personalInformation::setProvince, dto.getProvince());
+		setter.setBoolean(personalInformation::setProvincePrivate, dto.getIsProvincePrivate());
 		this.repository.save(personalInformation);
 		return this.util.sendOk("sukses mengupdate data personal information", true, null);
 	}
