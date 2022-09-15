@@ -16,6 +16,9 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import com.demo.security.authentication.JwtAuthentication;
 import com.demo.security.manager.JwtManager;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class JwtFilter extends OncePerRequestFilter{
 	
 	private final JwtManager manager;
@@ -35,6 +38,7 @@ public class JwtFilter extends OncePerRequestFilter{
 		}
 		JwtAuthentication jwtAuth = new JwtAuthentication(header, null);
 		Authentication auth = manager.authenticate(jwtAuth);
+		log.info("authenticated = " + auth.isAuthenticated());
 		if(!auth.isAuthenticated()){
 			response.sendError(HttpStatus.FORBIDDEN.value(), "header \"Authorization\" tidak valid!");
 			return;
