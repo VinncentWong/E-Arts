@@ -24,7 +24,7 @@ import lombok.ToString;
 
 @Entity
 @Data
-@ToString(exclude = "personal")
+@ToString(exclude = "personalInformation")
 public class Artist implements Human{
 	
 	@Id
