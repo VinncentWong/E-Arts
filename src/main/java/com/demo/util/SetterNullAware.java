@@ -3,6 +3,8 @@ package com.demo.util;
 import java.util.Date;
 import java.util.function.Consumer;
 
+import com.demo.domain.Gender;
+
 public class SetterNullAware<T>{
 
 	public void setNumber(Consumer<? super Number> consumer, T object, Number data) {
@@ -21,6 +23,11 @@ public class SetterNullAware<T>{
 	}
 	
 	public void setString(Consumer<? super String> consumer, T object, String data) {
+		if(data != null)
+			consumer.accept(data);
+	}
+	
+	public void setGender(Consumer<? super Gender> consumer, Gender data) {
 		if(data != null)
 			consumer.accept(data);
 	}
