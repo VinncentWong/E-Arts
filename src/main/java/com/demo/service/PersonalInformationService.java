@@ -62,7 +62,7 @@ public class PersonalInformationService {
 	
 	public ResponseEntity<Response> updatePersonalInformation(PersonalInformationDto dto, Long personalInformationId) 
 			throws PersonalInformationNotFoundException, ArtistNotFoundException{
-		SetterNullAware<PersonalInformation> setter = new SetterNullAware<>();
+		SetterNullAware setter = new SetterNullAware();
 		PersonalInformation personalInformation = this.repository.findById(personalInformationId).orElseThrow(() -> new PersonalInformationNotFoundException());
 		setter.setString(personalInformation::setAddress, dto.getAddress());
 		setter.setBoolean(personalInformation::setAddressPrivate,  dto.getIsAddressPrivate());

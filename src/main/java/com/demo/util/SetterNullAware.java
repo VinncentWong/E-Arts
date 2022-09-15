@@ -5,7 +5,7 @@ import java.util.function.Consumer;
 
 import com.demo.domain.Gender;
 
-public class SetterNullAware<T>{
+public class SetterNullAware{
 
 	public void setNumber(Consumer<? super Number> consumer, Number data) {
 		if(data != null)
