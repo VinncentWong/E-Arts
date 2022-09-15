@@ -15,6 +15,7 @@ import com.demo.exception.PersonalInformationNotFoundException;
 import com.demo.repositories.ArtistRepository;
 import com.demo.repositories.PersonalInformationRepository;
 import com.demo.util.ResponseUtil;
+import com.demo.util.SetterNullAware;
 
 @Service
 @Transactional
@@ -61,7 +62,9 @@ public class PersonalInformationService {
 	
 	public ResponseEntity<Response> updatePersonalInformation(PersonalInformationDto dto, Long personalInformationId) 
 			throws PersonalInformationNotFoundException, ArtistNotFoundException{
+		SetterNullAware<PersonalInformation> setter = new SetterNullAware<>();
 		PersonalInformation personalInformation = this.repository.findById(personalInformationId).orElseThrow(() -> new PersonalInformationNotFoundException());
+		setter.setString(personalInformation::setAddress, personalInformation, dto.getAddress());
 		personalInformation.setAddress(dto.getAddress());
 		personalInformation.setAddressPrivate(dto.getIsAddressPrivate());
 		personalInformation.setCity(dto.getCity());
