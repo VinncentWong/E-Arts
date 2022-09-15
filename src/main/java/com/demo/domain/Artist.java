@@ -52,9 +52,6 @@ public class Artist implements Human{
 	@Temporal(TemporalType.DATE)
 	private Date deletedAt;
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "artist" )
-	private List<PersonalInformation> personal;
-	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "artistId")
 	private List<Awards> award;
 	
