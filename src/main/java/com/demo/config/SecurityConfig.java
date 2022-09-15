@@ -7,9 +7,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 
+import com.demo.security.filter.JwtFilter;
 import com.demo.security.manager.JwtManager;
 import com.demo.security.provider.JwtProvider;
 
@@ -29,6 +31,11 @@ public class SecurityConfig {
 			};
 			c.configurationSource(cors);
 		})
+		.addFilterBefore(filter(), UsernamePasswordAuthenticationFilter.class)
+		.authorizeHttpRequests()
+		.anyRequest()
+		.authenticated()
+		.and()
 		.formLogin().disable()
 		.httpBasic().disable();
 		return http.build();
@@ -42,6 +49,11 @@ public class SecurityConfig {
 	@Bean
 	public JwtManager manager() {
 		return new JwtManager(provider());
+	}
+	
+	@Bean
+	public JwtFilter filter() {
+		return new JwtFilter(manager());
 	}
 	
 	@Bean
