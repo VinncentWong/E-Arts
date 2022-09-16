@@ -9,7 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.demo.domain.ArtWork;
+import com.demo.domain.ArtWorkWeightDimension;
 import com.demo.domain.Artist;
+import com.demo.domain.Dimension;
 import com.demo.domain.Response;
 import com.demo.domain.dto.ArtworkDto;
 import com.demo.exception.ArtistNotFoundException;
@@ -18,6 +20,7 @@ import com.demo.repositories.ArtistRepository;
 import com.demo.repositories.ArtworkRepository;
 import com.demo.util.ResponseUtil;
 import com.demo.util.SetterNullAware;
+
 
 @Service
 @Transactional
@@ -37,18 +40,26 @@ public class ArtworkService {
 	}
 	
 	public ResponseEntity<Response> createArtwork(ArtworkDto dto, Long artistId) throws ArtistNotFoundException{
+		System.out.println(dto.toString());
+		System.out.println(dto.getDimension());
 		Artist artist = this.artistRepository.findById(artistId).orElseThrow(() -> new ArtistNotFoundException());
 		ArtWork artwork = new ArtWork();
+		ArtWorkWeightDimension artworkDimension = new ArtWorkWeightDimension();
+		Dimension dimension = new Dimension();
+		Dimension temp = dto.getDimension().getDimension();
 		artwork.setArtist(artist);
 		artwork.setCategory(dto.getCategory());
 		artwork.setDescription(dto.getDescription());
-		artwork.setDimension(artwork.getDimension());
 		artwork.setName(dto.getName());
 		artwork.setPhoto(dto.getPhoto());
 		artwork.setStatus(dto.getStatus());
 		artwork.setStock(dto.getStock());
-		artwork.getDimension().setArtwork(artwork);
-		artwork.getDimension().getDimension().setArtWorkDimension(artwork.getDimension());
+		artworkDimension.setWeight(dto.getDimension().getWeight());
+		artwork.setDimension(artworkDimension);
+		dimension.setHeight(temp.getHeight());
+		dimension.setLength(temp.getLength());
+		dimension.setWidth(temp.getWidth());
+		artwork.getDimension().setDimension(dimension);
 		this.repository.save(artwork);
 		return this.util.sendCreated("sukses membuat artwork!", true, artwork);
 	}
