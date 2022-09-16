@@ -25,7 +25,6 @@ import lombok.ToString;
 @Entity
 @Data
 @ToString(exclude = "artist")
-@DynamicUpdate(value = true)
 public class PersonalInformation {
 
 	@Id
