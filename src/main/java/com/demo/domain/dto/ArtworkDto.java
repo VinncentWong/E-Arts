@@ -29,7 +29,7 @@ public class ArtworkDto {
 	private Integer stock;
 	
 	@Lob
-	private byte[] photo;
+	private Byte[] photo;
 	
 	private Boolean status;
 	
