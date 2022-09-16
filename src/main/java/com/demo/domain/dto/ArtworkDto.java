@@ -1,9 +1,5 @@
 package com.demo.domain.dto;
 
-import java.util.List;
-
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.Lob;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
