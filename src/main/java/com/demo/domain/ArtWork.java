@@ -31,7 +31,7 @@ public class ArtWork {
 	@Lob
 	private byte[] photo;
 	
-	private boolean status;
+	private Boolean status;
 	
 	@Enumerated(EnumType.STRING)
 	private CategoryArtwork category;
