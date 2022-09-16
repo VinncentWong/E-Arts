@@ -74,6 +74,7 @@ public class ArtworkService {
 	public ResponseEntity<Response> deleteArtwork(Long artworkId, Long artistId) throws ArtworkNotFoundException, ArtistNotFoundException{
 		this.repository.findById(artworkId).orElseThrow(() -> new ArtworkNotFoundException());
 		this.artistRepository.findById(artistId).orElseThrow(() -> new ArtistNotFoundException());
-		return null;
+		this.repository.deleteArtwork(artistId, artworkId);
+		return this.util.sendOk("sukses menghapus data artwork", true, null);
 	}
 }
