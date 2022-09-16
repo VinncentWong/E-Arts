@@ -47,7 +47,8 @@ public class ArtworkService {
 		artwork.setPhoto(dto.getPhoto());
 		artwork.setStatus(dto.getStatus());
 		artwork.setStock(dto.getStock());
-		artwork.setDimension(dto.getDimension());
+		artwork.getDimension().setArtwork(artwork);
+		artwork.getDimension().getDimension().setArtWorkDimension(artwork.getDimension());
 		this.repository.save(artwork);
 		return this.util.sendCreated("sukses membuat artwork!", true, artwork);
 	}
