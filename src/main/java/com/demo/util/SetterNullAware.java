@@ -45,12 +45,12 @@ public class SetterNullAware{
 			consumer.accept(data);
 	}
 	
-	public void setCategory(Consumer<? super List<CategoryArtwork>> consumer, CategoryArtwork data) {
+	public void setCategory(Consumer<? super List<CategoryArtwork>> consumer, List<CategoryArtwork> data) {
 		if(data != null) {
-			if(data.name().equals("ALL")) {
+			if(data.get(0).name().equals("ALL")) {
 				consumer.accept(List.of(CategoryArtwork.FACTORYMADE, CategoryArtwork.HANDMANDE, CategoryArtwork.SOFTWAREMADE, CategoryArtwork.THREEDIMENSION, CategoryArtwork.TWODIMENSION));
 			} else {
-				consumer.accept(List.of(data));
+				consumer.accept(List.of(data.get(0)));
 			}
 		}
 	}
