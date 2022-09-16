@@ -32,7 +32,8 @@ public class ArtWorkController {
 	}
 	
 	@PostMapping("/create/{artistId}")
-	public ResponseEntity<Response> createArtwork(@RequestBody @Valid ArtworkDto dto, @PathVariable Long id) throws ArtistNotFoundException{
+	public ResponseEntity<Response> createArtwork(@RequestBody @Valid ArtworkDto dto, @PathVariable("artistId") Long id)
+			throws ArtistNotFoundException{
 		return this.service.createArtwork(dto, id);
 	}
 	
