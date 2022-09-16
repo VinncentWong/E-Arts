@@ -3,6 +3,7 @@ package com.demo.util;
 import java.util.Date;
 import java.util.function.Consumer;
 
+import com.demo.domain.ArtWork;
 import com.demo.domain.Gender;
 
 public class SetterNullAware{
@@ -28,6 +29,11 @@ public class SetterNullAware{
 	}
 	
 	public void setGender(Consumer<? super Gender> consumer, Gender data) {
+		if(data != null)
+			consumer.accept(data);
+	}
+	
+	public void setArtwork(Consumer<? super ArtWork> consumer, ArtWork data) {
 		if(data != null)
 			consumer.accept(data);
 	}
