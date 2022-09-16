@@ -34,7 +34,7 @@ public class SecurityConfig {
 		.addFilterBefore(filter(), UsernamePasswordAuthenticationFilter.class)
 		.authorizeHttpRequests()
 		.anyRequest()
-		.authenticated()
+		.permitAll()
 		.and()
 		.formLogin().disable()
 		.httpBasic().disable();
