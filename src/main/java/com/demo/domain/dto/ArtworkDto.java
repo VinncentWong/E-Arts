@@ -32,8 +32,5 @@ public class ArtworkDto {
 	private CategoryArtwork category;
 	
 	@NotNull
-	private Artist artist;
-	
-	@NotNull
 	private ArtWorkWeightDimension dimension;
 }
