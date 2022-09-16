@@ -33,7 +33,6 @@ public class ArtworkDto {
 	
 	private Boolean status;
 	
-	@Enumerated(EnumType.STRING)
 	private List<CategoryArtwork> category;
 	
 	@NotNull

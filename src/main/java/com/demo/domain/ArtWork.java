@@ -35,7 +35,6 @@ public class ArtWork {
 	
 	private Boolean status;
 	
-	@Enumerated(EnumType.STRING)
 	private List<CategoryArtwork> category;
 	
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
