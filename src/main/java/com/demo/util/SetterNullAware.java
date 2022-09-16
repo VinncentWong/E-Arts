@@ -8,7 +8,7 @@ import com.demo.domain.Gender;
 
 public class SetterNullAware{
 
-	public void setNumber(Consumer<? super Number> consumer, Number data) {
+	public void setNumber(Consumer<? super Integer> consumer, Integer data) {
 		if(data != null)
 			consumer.accept(data);
 	}

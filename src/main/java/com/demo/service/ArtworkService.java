@@ -17,6 +17,7 @@ import com.demo.exception.ArtworkNotFoundException;
 import com.demo.repositories.ArtistRepository;
 import com.demo.repositories.ArtworkRepository;
 import com.demo.util.ResponseUtil;
+import com.demo.util.SetterNullAware;
 
 @Service
 @Transactional
@@ -44,11 +45,17 @@ public class ArtworkService {
 	}
 	
 	public ResponseEntity<Response> getArtwork(Long artistId) throws ArtworkNotFoundException{
-		List<ArtWork> listArtwork = this.repository.getArtwork(artistId).orElseThrow(() -> new ArtworkNotFoundException());
+		List<ArtWork> listArtwork = this.repository.getArtworks(artistId).orElseThrow(() -> new ArtworkNotFoundException());
 		return this.util.sendOk("sukses mendapatkan artwork", true, listArtwork);
 	}
 	
-	public ResponseEntity<Response> updateArtwork(Long artworkId, Long artistId) throws ArtworkNotFoundException{
-		return null;
+	public ResponseEntity<Response> updateArtwork(Long artworkId, Long artistId, ArtworkDto dto) throws ArtworkNotFoundException{
+		ArtWork artwork = this.repository.getArtwork(artistId, artworkId).orElseThrow(() -> new ArtworkNotFoundException());
+		SetterNullAware setter = new SetterNullAware();
+		setter.setString(artwork::setName, artwork.getName());
+		setter.setString(artwork::setDescription, dto.getDescription());
+		setter.setNumber(artwork::setStock, dto.getStock());
+		
+	
 	}
 }
