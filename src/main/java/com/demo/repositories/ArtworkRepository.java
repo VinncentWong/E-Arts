@@ -13,10 +13,10 @@ import com.demo.domain.ArtWork;
 @Repository
 public interface ArtworkRepository extends CrudRepository<ArtWork, Long> {
 	
-	@Query(nativeQuery = true, value = "SELECT * FROM artwork WHERE artist_id = ?1")
+	@Query(nativeQuery = true, value = "SELECT * FROM art_work WHERE artist_id = ?1")
 	Optional<List<ArtWork>> getArtworks(Long artistId);
 	
-	@Query(nativeQuery = true, value = "SELECT *  FROM artwork WHERE artist_id = ?1 AND id = ?2")
+	@Query(nativeQuery = true, value = "SELECT *  FROM art_work WHERE artist_id = ?1 AND id = ?2")
 	Optional<ArtWork> getArtwork(Long artistId, Long artworkId);
 	
 	@Query(nativeQuery = true, value = "DELETE FROM art_work WHERE artist_id = ?1 AND id = ?2")
