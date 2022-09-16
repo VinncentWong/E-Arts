@@ -20,8 +20,11 @@ public class ArtWorkWeightDimension {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private int weight;
+	private Integer weight;
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private ArtWork artwork;
+	
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "artWorkDimension")
+	private Dimension dimension;
 }
