@@ -8,12 +8,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 import lombok.ToString;
 
 @Entity
 @Data
-@ToString
+@ToString(exclude = "artwork")
 public class ArtWorkWeightDimension {
 
 	@Id
@@ -23,6 +25,7 @@ public class ArtWorkWeightDimension {
 	private Integer weight;
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JsonIgnore
 	private ArtWork artwork;
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "artWorkDimension")
