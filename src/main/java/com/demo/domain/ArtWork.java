@@ -26,7 +26,7 @@ public class ArtWork {
 	
 	private String description;
 	
-	private int stock;
+	private Integer stock;
 	
 	@Lob
 	private byte[] photo;
