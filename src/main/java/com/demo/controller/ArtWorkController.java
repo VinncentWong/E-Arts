@@ -46,5 +46,11 @@ public class ArtWorkController {
 			throws ArtworkNotFoundException{
 		return this.service.updateArtwork(artworkId, artistId, dto);
 	}
+	
+	@DeleteMapping("/delete")
+	public ResponseEntity<Response> deleteArtwork(@Param("artistId") Long artistId, @Param("artworkId") Long artworkId)
+			throws ArtworkNotFoundException, ArtistNotFoundException{
+		return this.service.deleteArtwork(artworkId, artistId);
+	}
 }
 
