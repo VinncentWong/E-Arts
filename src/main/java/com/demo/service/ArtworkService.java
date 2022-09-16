@@ -1,5 +1,7 @@
 package com.demo.service;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import com.demo.domain.Artist;
 import com.demo.domain.Response;
 import com.demo.domain.dto.ArtworkDto;
 import com.demo.exception.ArtistNotFoundException;
+import com.demo.exception.ArtworkNotFoundException;
 import com.demo.repositories.ArtistRepository;
 import com.demo.repositories.ArtworkRepository;
 import com.demo.util.ResponseUtil;
@@ -40,7 +43,8 @@ public class ArtworkService {
 		return this.util.sendCreated("sukses membuat artwork!", true, data);
 	}
 	
-	public ResponseEntity<Response> getArtwork(Long artistId){
-		return null;
+	public ResponseEntity<Response> getArtwork(Long artistId) throws ArtworkNotFoundException{
+		List<ArtWork> listArtwork = this.repository.getArtwork(artistId).orElseThrow(() -> new ArtworkNotFoundException());
+		return this.util.sendOk("sukses mendapatkan artwork", true, listArtwork);
 	}
 }

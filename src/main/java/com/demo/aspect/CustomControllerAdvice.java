@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.demo.domain.Response;
 import com.demo.exception.ArtistNotFoundException;
+import com.demo.exception.ArtworkNotFoundException;
 import com.demo.exception.AwardsNotFoundException;
 import com.demo.exception.EducationalNotFoundException;
 import com.demo.exception.ExpertiseNotFoundException;
@@ -58,5 +59,10 @@ public class CustomControllerAdvice {
 	@ExceptionHandler(SocialMediaNotFoundException.class)
 	public ResponseEntity<Response> sendSocialMediaNotFound(){
 		return util.sendInternalServerError("data social media tidak ditemukan", false);
+	}
+	
+	@ExceptionHandler(ArtworkNotFoundException.class)
+	public ResponseEntity<Response> sendArtworkNotFound(){
+		return util.sendInternalServerError("data artwork tidak ditemukan", false);
 	}
 }
