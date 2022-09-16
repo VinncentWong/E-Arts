@@ -65,7 +65,6 @@ public class ArtworkService {
 		setter.setBoolean(artwork::setStatus, dto.getStatus());
 		setter.setCategory(artwork::setCategory, dto.getCategory());
 		setter.setByte(artwork::setPhoto, dto.getPhoto());
-		setter.setArtist(artwork::setArtist, dto.getArtist());
 		setter.setDimension(artwork::setDimension, dto.getDimension());
 		this.repository.save(artwork);
 		return this.util.sendOk("sukses mengupdate data artwork", true, null);
