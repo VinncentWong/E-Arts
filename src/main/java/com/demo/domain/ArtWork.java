@@ -2,6 +2,8 @@ package com.demo.domain;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,6 +31,9 @@ public class ArtWork {
 	private byte[] photo;
 	
 	private boolean status;
+	
+	@Enumerated(EnumType.STRING)
+	private CategoryArtwork category;
 	
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Artist artist;
