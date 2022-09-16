@@ -47,4 +47,8 @@ public class ArtworkService {
 		List<ArtWork> listArtwork = this.repository.getArtwork(artistId).orElseThrow(() -> new ArtworkNotFoundException());
 		return this.util.sendOk("sukses mendapatkan artwork", true, listArtwork);
 	}
+	
+	public ResponseEntity<Response> updateArtwork(Long artworkId, Long artistId) throws ArtworkNotFoundException{
+		return null;
+	}
 }
