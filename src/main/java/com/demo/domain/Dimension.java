@@ -28,7 +28,7 @@ public class Dimension {
 	
 	private Integer height;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY)
 	@JsonIgnore
 	private ArtWorkWeightDimension artWorkDimension;
 	
