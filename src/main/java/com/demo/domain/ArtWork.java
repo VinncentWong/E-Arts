@@ -1,5 +1,7 @@
 package com.demo.domain;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -34,7 +36,7 @@ public class ArtWork {
 	private Boolean status;
 	
 	@Enumerated(EnumType.STRING)
-	private CategoryArtwork category;
+	private List<CategoryArtwork> category;
 	
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Artist artist;

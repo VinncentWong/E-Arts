@@ -1,5 +1,7 @@
 package com.demo.domain.dto;
 
+import java.util.List;
+
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Lob;
@@ -32,7 +34,7 @@ public class ArtworkDto {
 	private Boolean status;
 	
 	@Enumerated(EnumType.STRING)
-	private CategoryArtwork category;
+	private List<CategoryArtwork> category;
 	
 	@NotNull
 	private Artist artist;
