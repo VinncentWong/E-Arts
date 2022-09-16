@@ -39,9 +39,16 @@ public class ArtworkService {
 	public ResponseEntity<Response> createArtwork(ArtworkDto dto, Long artistId) throws ArtistNotFoundException{
 		Artist artist = this.artistRepository.findById(artistId).orElseThrow(() -> new ArtistNotFoundException());
 		ArtWork artwork = new ArtWork();
-		artist.setArtwork(artwork);
-		Artist data = this.artistRepository.save(artist);
-		return this.util.sendCreated("sukses membuat artwork!", true, data);
+		artwork.setArtist(artist);
+		artwork.setCategory(dto.getCategory());
+		artwork.setDescription(dto.getDescription());
+		artwork.setDimension(artwork.getDimension());
+		artwork.setName(dto.getName());
+		artwork.setPhoto(dto.getPhoto());
+		artwork.setStatus(dto.getStatus());
+		artwork.setStock(dto.getStock());
+		this.repository.save(artwork);
+		return this.util.sendCreated("sukses membuat artwork!", true, artwork);
 	}
 	
 	public ResponseEntity<Response> getArtwork(Long artistId) throws ArtworkNotFoundException{
