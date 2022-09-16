@@ -39,6 +39,6 @@ public class ArtWork {
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Artist artist;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "artWork")
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "artwork")
 	private ArtWorkWeightDimension dimension;
 }
