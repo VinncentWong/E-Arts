@@ -33,7 +33,7 @@ public class ArtworkDto {
 	
 	private Boolean status;
 	
-	private List<CategoryArtwork> category;
+	private CategoryArtwork category;
 	
 	@NotNull
 	private Artist artist;
