@@ -55,7 +55,7 @@ public class ArtworkService {
 		setter.setString(artwork::setName, artwork.getName());
 		setter.setString(artwork::setDescription, dto.getDescription());
 		setter.setNumber(artwork::setStock, dto.getStock());
-		
-	
+		setter.setBoolean(artwork::setStatus, dto.getStatus());
+		return null;
 	}
 }
