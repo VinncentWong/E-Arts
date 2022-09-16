@@ -66,6 +66,14 @@ public class ArtworkService {
 		setter.setCategory(artwork::setCategory, dto.getCategory());
 		setter.setByte(artwork::setPhoto, dto.getPhoto());
 		setter.setArtist(artwork::setArtist, dto.getArtist());
+		setter.setDimension(artwork::setDimension, dto.getDimension());
+		this.repository.save(artwork);
+		return this.util.sendOk("sukses mengupdate data artwork", true, null);
+	}
+	
+	public ResponseEntity<Response> deleteArtwork(Long artworkId, Long artistId) throws ArtworkNotFoundException, ArtistNotFoundException{
+		this.repository.findById(artworkId).orElseThrow(() -> new ArtworkNotFoundException());
+		this.artistRepository.findById(artistId).orElseThrow(() -> new ArtistNotFoundException());
 		return null;
 	}
 }
