@@ -27,8 +27,10 @@ public class ArtworkDto {
 	@Lob
 	private Byte[] photo;
 	
+	@NotNull
 	private Boolean status;
 	
+	@NotNull
 	private CategoryArtwork category;
 	
 	@NotNull
