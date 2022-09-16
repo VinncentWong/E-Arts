@@ -13,5 +13,8 @@ import com.demo.domain.ArtWork;
 public interface ArtworkRepository extends CrudRepository<ArtWork, Long> {
 	
 	@Query(nativeQuery = true, value = "SELECT * FROM artwork WHERE artist_id = ?1")
-	Optional<List<ArtWork>> getArtwork(Long artistId);
+	Optional<List<ArtWork>> getArtworks(Long artistId);
+	
+	@Query(nativeQuery = true, value = "SELECT *  FROM artwork WHERE artist_id = ?1 AND id = ?2")
+	Optional<ArtWork> getArtwork(Long artistId, Long artworkId);
 }
