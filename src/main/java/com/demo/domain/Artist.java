@@ -69,5 +69,5 @@ public class Artist implements Human{
 	private PersonalInformation personalInformation;
 	
 	@OneToMany(mappedBy = "artist")
-	private ArtWork artwork;
+	private List<ArtWork> artwork;
 }
