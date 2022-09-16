@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.function.Consumer;
 
 import com.demo.domain.ArtWork;
+import com.demo.domain.Artist;
 import com.demo.domain.Gender;
 import com.demo.domain.CategoryArtwork;
 
@@ -54,4 +55,10 @@ public class SetterNullAware{
 			}
 		}
 	}
+	
+	public void setArtist(Consumer<? super Artist> consumer, Artist data) {
+		if(data != null)
+			consumer.accept(data);
+	}
+	
 }
