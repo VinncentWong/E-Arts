@@ -39,4 +39,8 @@ public class ArtworkService {
 		Artist data = this.artistRepository.save(artist);
 		return this.util.sendCreated("sukses membuat artwork!", true, data);
 	}
+	
+	public ResponseEntity<Response> getArtwork(Long artistId){
+		return null;
+	}
 }
