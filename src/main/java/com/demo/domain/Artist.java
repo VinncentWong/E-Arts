@@ -67,4 +67,7 @@ public class Artist implements Human{
 	
 	@OneToOne(mappedBy = "artist")
 	private PersonalInformation personalInformation;
+	
+	@OneToMany(mappedBy = "artist")
+	private ArtWork artwork;
 }
