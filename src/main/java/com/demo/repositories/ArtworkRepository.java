@@ -30,4 +30,8 @@ public interface ArtworkRepository extends CrudRepository<ArtWork, Long> {
 	@Query(nativeQuery = true, value = "DELETE FROM dimension WHERE id = ?1")
 	@Modifying
 	void deleteDimension(Long dimensionId);
+	
+	@Query(nativeQuery = true, value = "UPDATE FROM photo SET photo = data WHERE id = ?2 AND artwork_id=?1")
+	@Modifying
+	void updatePhoto(Long artworkId, Long photoId, byte[] data);
 }
