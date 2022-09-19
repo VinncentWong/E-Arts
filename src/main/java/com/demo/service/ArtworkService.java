@@ -1,5 +1,7 @@
 package com.demo.service;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -7,6 +9,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.demo.domain.ArtWork;
 import com.demo.domain.ArtWorkWeightDimension;
@@ -16,6 +19,7 @@ import com.demo.domain.Response;
 import com.demo.domain.dto.ArtworkDto;
 import com.demo.exception.ArtistNotFoundException;
 import com.demo.exception.ArtworkNotFoundException;
+import com.demo.exception.InternalServerErrorException;
 import com.demo.repositories.ArtistRepository;
 import com.demo.repositories.ArtworkRepository;
 import com.demo.util.ResponseUtil;
@@ -39,7 +43,7 @@ public class ArtworkService {
 		this.util = util;
 	}
 	
-	public ResponseEntity<Response> createArtwork(ArtworkDto dto, Long artistId) throws ArtistNotFoundException{
+	public ResponseEntity<Response> createArtwork(ArtworkDto dto, Long artistId, List<MultipartFile> files) throws ArtistNotFoundException, IOException{
 		System.out.println(dto.toString());
 		System.out.println(dto.getDimension());
 		Artist artist = this.artistRepository.findById(artistId).orElseThrow(() -> new ArtistNotFoundException());
@@ -47,11 +51,20 @@ public class ArtworkService {
 		ArtWorkWeightDimension artworkDimension = new ArtWorkWeightDimension();
 		Dimension dimension = new Dimension();
 		Dimension temp = dto.getDimension().getDimension();
+		List<byte[]> list = new ArrayList<>();
+		files.forEach((x) -> {
+			try{
+				list.add(x.getBytes());
+			}
+			catch(IOException ex) {
+				this.util.sendInternalServerError("terjadi kesahalan ketika melakukan migrasi file ke byte", false);
+			}
+		});
 		artwork.setArtist(artist);
 		artwork.setCategory(dto.getCategory());
 		artwork.setDescription(dto.getDescription());
 		artwork.setName(dto.getName());
-		artwork.setPhoto(dto.getPhoto());
+		artwork.setPhoto(list);
 		artwork.setStatus(dto.getStatus());
 		artwork.setStock(dto.getStock());
 		artworkDimension.setWeight(dto.getDimension().getWeight());
@@ -79,9 +92,9 @@ public class ArtworkService {
 		setter.setNumber(artwork::setStock, dto.getStock());
 		setter.setBoolean(artwork::setStatus, dto.getStatus());
 		setter.setCategory(artwork::setCategory, dto.getCategory());
-		setter.setListByte(artwork::setPhoto, dto.getPhoto());
+//		setter.setListByte(artwork::setPhoto, dto.getPhoto());
 		setter.setDimension(artwork::setDimension, dto.getDimension());
-		setter.setListByte(artwork::setPhoto, dto.getPhoto());
+//		setter.setListByte(artwork::setPhoto, dto.getPhoto());
 		setter.setNumber(artworkWeight::setWeight, dto.getDimension().getWeight());
 		setter.setNumber(dimension::setLength, dto.getDimension().getDimension().getLength());
 		setter.setNumber(dimension::setHeight, dto.getDimension().getDimension().getHeight());

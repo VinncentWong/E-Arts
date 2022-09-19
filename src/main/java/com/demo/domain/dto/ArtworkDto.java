@@ -27,7 +27,7 @@ public class ArtworkDto {
 	private Integer stock;
 	
 	@Lob
-	private List<Byte[]> photo;
+	private List<byte[]> photo;
 	
 	@NotNull
 	private Boolean status;

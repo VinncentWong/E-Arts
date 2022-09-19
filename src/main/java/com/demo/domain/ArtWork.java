@@ -33,7 +33,7 @@ public class ArtWork {
 	private Integer stock;
 	
 	@Lob
-	private List<Byte[]> photo;
+	private List<byte[]> photo;
 	
 	private Boolean status;
 	
@@ -44,6 +44,5 @@ public class ArtWork {
 	private Artist artist;
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "artwork")
-	@Cascade(value = {org.hibernate.annotations.CascadeType.DELETE})
 	private ArtWorkWeightDimension dimension;
 }
