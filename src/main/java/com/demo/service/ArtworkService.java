@@ -15,6 +15,7 @@ import com.demo.domain.ArtWork;
 import com.demo.domain.ArtWorkWeightDimension;
 import com.demo.domain.Artist;
 import com.demo.domain.Dimension;
+import com.demo.domain.Photo;
 import com.demo.domain.Response;
 import com.demo.domain.dto.ArtworkDto;
 import com.demo.exception.ArtistNotFoundException;
@@ -36,6 +37,8 @@ public class ArtworkService {
 	
 	private final ResponseUtil util;
 	
+	private boolean processValid;
+	
 	@Autowired
 	public ArtworkService(ArtworkRepository repository, ArtistRepository artistRepository, ResponseUtil util) {
 		this.repository = repository;
@@ -43,7 +46,7 @@ public class ArtworkService {
 		this.util = util;
 	}
 	
-	public ResponseEntity<Response> createArtwork(ArtworkDto dto, Long artistId, List<MultipartFile> files) throws ArtistNotFoundException, IOException{
+	public ResponseEntity<Response> createArtwork(ArtworkDto dto, Long artistId, List<MultipartFile> files) throws ArtistNotFoundException{
 		System.out.println(dto.toString());
 		System.out.println(dto.getDimension());
 		Artist artist = this.artistRepository.findById(artistId).orElseThrow(() -> new ArtistNotFoundException());
@@ -51,20 +54,29 @@ public class ArtworkService {
 		ArtWorkWeightDimension artworkDimension = new ArtWorkWeightDimension();
 		Dimension dimension = new Dimension();
 		Dimension temp = dto.getDimension().getDimension();
-		List<byte[]> list = new ArrayList<>();
-		files.forEach((x) -> {
-			try{
-				list.add(x.getBytes());
+		List<Photo> listPhoto = new ArrayList<>();
+		this.processValid = true;
+		files.forEach((b) -> {
+			try {
+				Photo photo = new Photo();
+				photo.setPhoto(b.getBytes());
+				listPhoto.add(photo);
 			}
 			catch(IOException ex) {
-				this.util.sendInternalServerError("terjadi kesahalan ketika melakukan migrasi file ke byte", false);
+				this.processValid = false;
+				return;
 			}
+		});
+		if(!this.processValid)
+			return this.util.sendInternalServerError("terjadi kesalahan pada saat melakukan migrasi data", false);
+		listPhoto.forEach((p) -> {
+			p.setArtwork(artwork);
 		});
 		artwork.setArtist(artist);
 		artwork.setCategory(dto.getCategory());
 		artwork.setDescription(dto.getDescription());
 		artwork.setName(dto.getName());
-		artwork.setPhoto(list);
+		artwork.setPhoto(listPhoto);
 		artwork.setStatus(dto.getStatus());
 		artwork.setStock(dto.getStock());
 		artworkDimension.setWeight(dto.getDimension().getWeight());
@@ -92,9 +104,8 @@ public class ArtworkService {
 		setter.setNumber(artwork::setStock, dto.getStock());
 		setter.setBoolean(artwork::setStatus, dto.getStatus());
 		setter.setCategory(artwork::setCategory, dto.getCategory());
-//		setter.setListByte(artwork::setPhoto, dto.getPhoto());
 		setter.setDimension(artwork::setDimension, dto.getDimension());
-//		setter.setListByte(artwork::setPhoto, dto.getPhoto());
+		setter.setListByte(artwork::setPhoto, dto.getPhoto());
 		setter.setNumber(artworkWeight::setWeight, dto.getDimension().getWeight());
 		setter.setNumber(dimension::setLength, dto.getDimension().getDimension().getLength());
 		setter.setNumber(dimension::setHeight, dto.getDimension().getDimension().getHeight());
