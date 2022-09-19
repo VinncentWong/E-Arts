@@ -9,6 +9,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import com.demo.domain.ArtWork;
+import com.demo.domain.Photo;
 
 @Repository
 public interface ArtworkRepository extends CrudRepository<ArtWork, Long> {
@@ -34,4 +35,7 @@ public interface ArtworkRepository extends CrudRepository<ArtWork, Long> {
 	@Query(nativeQuery = true, value = "UPDATE FROM photo SET photo = data WHERE id = ?2 AND artwork_id=?1")
 	@Modifying
 	void updatePhoto(Long artworkId, Long photoId, byte[] data);
+	
+	@Query(nativeQuery = true, value = "SELECT * FROM photo WHERE id = ?1")
+	Photo getPhoto(Long photoId);
 }
