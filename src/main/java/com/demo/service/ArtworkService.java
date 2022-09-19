@@ -79,9 +79,9 @@ public class ArtworkService {
 		setter.setNumber(artwork::setStock, dto.getStock());
 		setter.setBoolean(artwork::setStatus, dto.getStatus());
 		setter.setCategory(artwork::setCategory, dto.getCategory());
-		setter.setByte(artwork::setPhoto, dto.getPhoto());
+		setter.setListByte(artwork::setPhoto, dto.getPhoto());
 		setter.setDimension(artwork::setDimension, dto.getDimension());
-		setter.setByte(artwork::setPhoto, dto.getPhoto());
+		setter.setListByte(artwork::setPhoto, dto.getPhoto());
 		setter.setNumber(artworkWeight::setWeight, dto.getDimension().getWeight());
 		setter.setNumber(dimension::setLength, dto.getDimension().getDimension().getLength());
 		setter.setNumber(dimension::setHeight, dto.getDimension().getDimension().getHeight());
