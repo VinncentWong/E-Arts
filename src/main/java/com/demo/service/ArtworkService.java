@@ -47,8 +47,6 @@ public class ArtworkService {
 	}
 	
 	public ResponseEntity<Response> createArtwork(ArtworkDto dto, Long artistId, List<MultipartFile> files) throws ArtistNotFoundException{
-		System.out.println(dto.toString());
-		System.out.println(dto.getDimension());
 		Artist artist = this.artistRepository.findById(artistId).orElseThrow(() -> new ArtistNotFoundException());
 		ArtWork artwork = new ArtWork();
 		ArtWorkWeightDimension artworkDimension = new ArtWorkWeightDimension();
@@ -122,5 +120,9 @@ public class ArtworkService {
 		this.repository.deleteArtworkWeight(artworkWeight.getId());
 		this.repository.deleteArtwork(artistId, artworkId);
 		return this.util.sendOk("sukses menghapus data artwork", true, null);
+	}
+	
+	public ResponseEntity<Response> updatePhoto(Long artworkId, Long photoId, MultipartFile file){
+		return null;
 	}
 }
