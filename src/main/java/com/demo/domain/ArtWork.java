@@ -33,7 +33,7 @@ public class ArtWork {
 	
 	private Integer stock;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "artwork")
 	private List<Photo> photo;
 	
 	private Boolean status;

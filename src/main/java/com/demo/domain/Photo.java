@@ -7,10 +7,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
+import lombok.ToString;
 
 @Entity
 @Data
+@ToString(exclude = "artwork")
 public class Photo {
 
 	@Id
@@ -20,5 +24,6 @@ public class Photo {
 	private byte[] photo;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnore
 	private ArtWork artwork;
 }
