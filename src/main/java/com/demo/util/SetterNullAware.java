@@ -47,7 +47,7 @@ public class SetterNullAware{
 			consumer.accept(data);
 	}
 	
-	public void setListByte(Consumer<? super List<Byte[]>> consumer, List<Byte[]> data) {
+	public void setListByte(Consumer<? super List<byte[]>> consumer, List<byte[]> data) {
 		if(data != null)
 			consumer.accept(data);
 	}
