@@ -12,6 +12,7 @@ import com.demo.exception.AwardsNotFoundException;
 import com.demo.exception.EducationalNotFoundException;
 import com.demo.exception.ExpertiseNotFoundException;
 import com.demo.exception.InternalServerErrorException;
+import com.demo.exception.PhotoNotFoundException;
 import com.demo.exception.PublicationNotFoundException;
 import com.demo.exception.SocialMediaNotFoundException;
 import com.demo.util.ResponseUtil;
@@ -64,5 +65,10 @@ public class CustomControllerAdvice {
 	@ExceptionHandler(ArtworkNotFoundException.class)
 	public ResponseEntity<Response> sendArtworkNotFound(){
 		return util.sendInternalServerError("data artwork tidak ditemukan", false);
+	}
+	
+	@ExceptionHandler(PhotoNotFoundException.class)
+	public ResponseEntity<Response> sendPhotoNotFound(){
+		return util.sendInternalServerError("data photo tidak ditemukan", false);
 	}
 }
