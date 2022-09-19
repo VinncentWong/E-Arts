@@ -21,6 +21,7 @@ import com.demo.domain.dto.ArtworkDto;
 import com.demo.exception.ArtistNotFoundException;
 import com.demo.exception.ArtworkNotFoundException;
 import com.demo.exception.InternalServerErrorException;
+import com.demo.exception.PhotoNotFoundException;
 import com.demo.repositories.ArtistRepository;
 import com.demo.repositories.ArtworkRepository;
 import com.demo.util.ResponseUtil;
@@ -122,7 +123,11 @@ public class ArtworkService {
 		return this.util.sendOk("sukses menghapus data artwork", true, null);
 	}
 	
-	public ResponseEntity<Response> updatePhoto(Long artworkId, Long photoId, MultipartFile file){
-		return null;
+	public ResponseEntity<Response> updatePhoto(Long artworkId, Long photoId, MultipartFile file)
+			throws IOException, PhotoNotFoundException, ArtworkNotFoundException{
+		this.repository.findById(artworkId).orElseThrow(() -> new ArtworkNotFoundException());
+		this.repository.getPhoto(photoId).orElseThrow(() -> new PhotoNotFoundException());
+		this.repository.updatePhoto(artworkId, photoId, file.getBytes());
+		return this.util.sendOk("sukses mengupdate data photo", true, null);
 	}
 }
