@@ -71,6 +71,8 @@ public class ArtworkService {
 	
 	public ResponseEntity<Response> updateArtwork(Long artworkId, Long artistId, ArtworkDto dto) throws ArtworkNotFoundException{
 		ArtWork artwork = this.repository.getArtwork(artistId, artworkId).orElseThrow(() -> new ArtworkNotFoundException());
+		ArtWorkWeightDimension artworkWeight = artwork.getDimension();
+		Dimension dimension = artwork.getDimension().getDimension();
 		SetterNullAware setter = new SetterNullAware();
 		setter.setString(artwork::setName, dto.getName());
 		setter.setString(artwork::setDescription, dto.getDescription());
@@ -80,7 +82,10 @@ public class ArtworkService {
 		setter.setByte(artwork::setPhoto, dto.getPhoto());
 		setter.setDimension(artwork::setDimension, dto.getDimension());
 		setter.setByte(artwork::setPhoto, dto.getPhoto());
-		setter.setDimension(artwork::setDimension, dto.getDimension());
+		setter.setNumber(artworkWeight::setWeight, dto.getDimension().getWeight());
+		setter.setNumber(dimension::setLength, dto.getDimension().getDimension().getLength());
+		setter.setNumber(dimension::setHeight, dto.getDimension().getDimension().getHeight());
+		setter.setNumber(dimension::setWidth, dto.getDimension().getDimension().getWidth());
 		this.repository.save(artwork);
 		return this.util.sendOk("sukses mengupdate data artwork", true, null);
 	}
