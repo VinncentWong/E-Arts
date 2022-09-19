@@ -91,8 +91,12 @@ public class ArtworkService {
 	}
 	
 	public ResponseEntity<Response> deleteArtwork(Long artworkId, Long artistId) throws ArtworkNotFoundException, ArtistNotFoundException{
-		this.repository.findById(artworkId).orElseThrow(() -> new ArtworkNotFoundException());
+		ArtWork artwork = this.repository.findById(artworkId).orElseThrow(() -> new ArtworkNotFoundException());
 		this.artistRepository.findById(artistId).orElseThrow(() -> new ArtistNotFoundException());
+		ArtWorkWeightDimension artworkWeight = artwork.getDimension();
+		Dimension dimension = artwork.getDimension().getDimension();
+		this.repository.deleteDimension(dimension.getId());
+		this.repository.deleteArtworkWeight(artworkWeight.getId());
 		this.repository.deleteArtwork(artistId, artworkId);
 		return this.util.sendOk("sukses menghapus data artwork", true, null);
 	}

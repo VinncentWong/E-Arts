@@ -10,6 +10,8 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import org.hibernate.annotations.Cascade;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
@@ -40,5 +42,6 @@ public class ArtWork {
 	private Artist artist;
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "artwork")
+	@Cascade(value = {org.hibernate.annotations.CascadeType.DELETE})
 	private ArtWorkWeightDimension dimension;
 }

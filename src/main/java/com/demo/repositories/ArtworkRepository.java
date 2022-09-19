@@ -22,4 +22,12 @@ public interface ArtworkRepository extends CrudRepository<ArtWork, Long> {
 	@Query(nativeQuery = true, value = "DELETE FROM art_work WHERE artist_id = ?1 AND id = ?2")
 	@Modifying
 	void deleteArtwork(Long artistId, Long artworkId);
+	
+	@Query(nativeQuery = true, value = "DELETE FROM art_work_weight_dimension WHERE id = ?1")
+	@Modifying
+	void deleteArtworkWeight(Long artworkWeightId);
+	
+	@Query(nativeQuery = true, value = "DELETE FROM dimension WHERE id = ?1")
+	@Modifying
+	void deleteDimension(Long dimensionId);
 }
