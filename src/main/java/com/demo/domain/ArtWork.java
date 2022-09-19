@@ -1,5 +1,7 @@
 package com.demo.domain;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -31,7 +33,7 @@ public class ArtWork {
 	private Integer stock;
 	
 	@Lob
-	private Byte[] photo;
+	private List<Byte[]> photo;
 	
 	private Boolean status;
 	

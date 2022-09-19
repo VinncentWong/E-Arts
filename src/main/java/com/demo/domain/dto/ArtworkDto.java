@@ -1,5 +1,7 @@
 package com.demo.domain.dto;
 
+import java.util.List;
+
 import javax.persistence.Lob;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -25,7 +27,7 @@ public class ArtworkDto {
 	private Integer stock;
 	
 	@Lob
-	private Byte[] photo;
+	private List<Byte[]> photo;
 	
 	@NotNull
 	private Boolean status;
