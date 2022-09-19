@@ -35,4 +35,5 @@ public class ArtworkDto {
 	
 	@NotNull
 	private ArtWorkWeightDimension dimension;
+
 }

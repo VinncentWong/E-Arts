@@ -79,6 +79,8 @@ public class ArtworkService {
 		setter.setCategory(artwork::setCategory, dto.getCategory());
 		setter.setByte(artwork::setPhoto, dto.getPhoto());
 		setter.setDimension(artwork::setDimension, dto.getDimension());
+		setter.setByte(artwork::setPhoto, dto.getPhoto());
+		setter.setDimension(artwork::setDimension, dto.getDimension());
 		this.repository.save(artwork);
 		return this.util.sendOk("sukses mengupdate data artwork", true, null);
 	}
