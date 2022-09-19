@@ -37,5 +37,5 @@ public interface ArtworkRepository extends CrudRepository<ArtWork, Long> {
 	void updatePhoto(Long artworkId, Long photoId, byte[] data);
 	
 	@Query(nativeQuery = true, value = "SELECT * FROM photo WHERE id = ?1")
-	Photo getPhoto(Long photoId);
+	Optional<Photo> getPhoto(Long photoId);
 }
