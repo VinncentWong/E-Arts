@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.Cascade;
@@ -32,8 +33,8 @@ public class ArtWork {
 	
 	private Integer stock;
 	
-	@Lob
-	private List<byte[]> photo;
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Photo> photo;
 	
 	private Boolean status;
 	
