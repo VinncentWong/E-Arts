@@ -72,7 +72,7 @@ public class ArtworkService {
 	public ResponseEntity<Response> updateArtwork(Long artworkId, Long artistId, ArtworkDto dto) throws ArtworkNotFoundException{
 		ArtWork artwork = this.repository.getArtwork(artistId, artworkId).orElseThrow(() -> new ArtworkNotFoundException());
 		SetterNullAware setter = new SetterNullAware();
-		setter.setString(artwork::setName, artwork.getName());
+		setter.setString(artwork::setName, dto.getName());
 		setter.setString(artwork::setDescription, dto.getDescription());
 		setter.setNumber(artwork::setStock, dto.getStock());
 		setter.setBoolean(artwork::setStatus, dto.getStatus());
