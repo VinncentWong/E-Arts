@@ -100,6 +100,12 @@ public class ArtistService {
 		return util.sendOk("data artis ditemukan", true, artist);
 	}
 	
+	public ResponseEntity<Response> deleteArtist(Long id) throws ArtistNotFoundException{
+		this.artistRepo.findById(id).orElseThrow(() -> new ArtistNotFoundException());
+		this.artistRepo.deleteById(id);
+		return this.util.sendOk("sukses menghapus data artist", true, null);
+	}
+	
 	public ResponseEntity<Response> addArtistExpertise(Long id, ExpertiseDto dto) throws ArtistNotFoundException{
 		Artist artist = artistRepo.findById(id).orElseThrow(() -> new ArtistNotFoundException());
 		Expertise expertise = new Expertise();
