@@ -13,7 +13,11 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import com.demo.security.authentication.JwtAuthentication;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.SignatureException;
+import io.jsonwebtoken.UnsupportedJwtException;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -38,7 +42,24 @@ public class JwtProvider implements AuthenticationProvider{
 			return new JwtAuthentication(token, null, auth);
 			
 		}
-		catch(Exception ex) {
+		catch(UnsupportedJwtException ex) {
+			log.info(ex.getMessage());
+			return new JwtAuthentication("tidak valid", null);
+		}
+		catch(MalformedJwtException ex) {
+			log.info(ex.getMessage());
+			return new JwtAuthentication("tidak valid", null);
+		}
+		catch(SignatureException ex) {
+			log.info(ex.getMessage());
+			return new JwtAuthentication("tidak valid", null);
+		}
+		catch(ExpiredJwtException ex) {
+			log.info(ex.getMessage());
+			return new JwtAuthentication("tidak valid", null);
+		}
+		catch(IllegalArgumentException ex) {
+			log.info(ex.getMessage());
 			return new JwtAuthentication("tidak valid", null);
 		}
 	}
