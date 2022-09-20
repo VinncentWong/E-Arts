@@ -28,6 +28,7 @@ public class JwtUtil<T extends Human> {
 		claims.put("id", obj.getId());
 		claims.put("name", obj.getName());
 		claims.put("createdAt", obj.getCreatedAt());
+		claims.put("role", obj.getRole());
 		String token = Jwts.builder()
 							.setClaims(claims)
 							.signWith(SignatureAlgorithm.HS256, Base64.getEncoder().encodeToString(secretKey.getBytes()))
