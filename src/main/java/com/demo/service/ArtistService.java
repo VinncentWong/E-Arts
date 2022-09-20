@@ -64,6 +64,10 @@ public class ArtistService {
 	}
 	
 	public ResponseEntity<Response> createArtist(SignUpDto dto){
+		Optional<Artist> tempArtist = this.artistRepo.getArtistByEmail(dto.getEmail());
+		if(tempArtist.isPresent()) {
+			return this.util.sendBadRequest("email sudah terdaftar", false);
+		}
 		Artist artist = new Artist();
 		artist.setEmail(dto.getEmail());
 		artist.setName(dto.getName());
