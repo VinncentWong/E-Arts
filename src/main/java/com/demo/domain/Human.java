@@ -6,4 +6,5 @@ public interface Human {
 	Long getId();
 	String getName();
 	Date getCreatedAt();
+	Role getRole();
 }

@@ -72,6 +72,7 @@ public class ArtistService {
 		artist.setEmail(dto.getEmail());
 		artist.setName(dto.getName());
 		artist.setPassword(bcrypt.encode(dto.getPassword()));
+		artist.setRole(dto.getRole());
 		PersonalInformation tempPersonal = new PersonalInformation();
 		tempPersonal.setDateBirth(dto.getBirthDate());
 		tempPersonal.setArtist(artist);

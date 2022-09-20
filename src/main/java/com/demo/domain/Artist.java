@@ -39,6 +39,8 @@ public class Artist implements Human{
 	
 	private String biography;
 	
+	private Role role;
+	
 	@CreationTimestamp
 	@Temporal(TemporalType.DATE)
 	private Date createdAt;
