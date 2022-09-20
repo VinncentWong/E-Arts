@@ -35,7 +35,7 @@ public class JwtProvider implements AuthenticationProvider{
 							.setSigningKey(Base64.getEncoder().encodeToString(secretKey.getBytes()))
 							.parseClaimsJws(token)
 							.getBody();
-			String role = claims.get("ROLE").toString();
+			String role = claims.get("role").toString();
 			role = new String("ROLE_" + role);
 			var auth = new ArrayList<GrantedAuthority>();
 			auth.add(new SimpleGrantedAuthority(role));
