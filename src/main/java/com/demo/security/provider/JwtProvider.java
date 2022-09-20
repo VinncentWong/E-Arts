@@ -14,7 +14,9 @@ import com.demo.security.authentication.JwtAuthentication;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class JwtProvider implements AuthenticationProvider{
 	
 	@Value("${JWT_SECRET_KEY}")
@@ -23,6 +25,7 @@ public class JwtProvider implements AuthenticationProvider{
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		String token = authentication.getName();
+		log.info("token = " + token);
 		try {
 			Claims claims = Jwts.parser()
 							.setSigningKey(Base64.getEncoder().encodeToString(secretKey.getBytes()))
