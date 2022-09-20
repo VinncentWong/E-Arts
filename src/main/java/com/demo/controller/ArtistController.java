@@ -50,8 +50,8 @@ public class ArtistController {
 	}
 	
 	@DeleteMapping("/delete/{id}")
-	public ResponseEntity<Response> deleteArtist(@PathVariable("id") Long id){
-		return service.deleteArtist();
+	public ResponseEntity<Response> deleteArtist(@PathVariable("id") Long id) throws ArtistNotFoundException{
+		return service.deleteArtist(id);
 	}
 	
 	@PostMapping("/addexpertise/{id}")
