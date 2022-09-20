@@ -76,7 +76,8 @@ public class ArtistService {
 		PersonalInformation tempPersonal = new PersonalInformation();
 		tempPersonal.setDateBirth(dto.getBirthDate());
 		tempPersonal.setArtist(artist);
-		repository.save(tempPersonal);
+		artist.setPersonalInformation(tempPersonal);
+		this.artistRepo.save(artist);
 		return util.sendCreated("success create user data", true, artist);
 	}
 	
