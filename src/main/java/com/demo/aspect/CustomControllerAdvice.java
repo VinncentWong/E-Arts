@@ -15,6 +15,7 @@ import com.demo.exception.InternalServerErrorException;
 import com.demo.exception.PhotoNotFoundException;
 import com.demo.exception.PublicationNotFoundException;
 import com.demo.exception.SocialMediaNotFoundException;
+import com.demo.exception.UserNotFoundException;
 import com.demo.util.ResponseUtil;
 
 @RestControllerAdvice
@@ -70,5 +71,10 @@ public class CustomControllerAdvice {
 	@ExceptionHandler(PhotoNotFoundException.class)
 	public ResponseEntity<Response> sendPhotoNotFound(){
 		return util.sendInternalServerError("data photo tidak ditemukan", false);
+	}
+	
+	@ExceptionHandler(UserNotFoundException.class)
+	public ResponseEntity<Response> sendUserNotFoundException(){
+		return this.util.sendInternalServerError("udata user tidak ditemukan", false);
 	}
 }
