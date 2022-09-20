@@ -31,11 +31,12 @@ public class JwtFilter extends OncePerRequestFilter{
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
-		String header = request.getHeader("Authorization").substring(7);
+		String header = request.getHeader("Authorization");
 		if(header == null) {
 			filterChain.doFilter(request, response);
 			return;
 		}
+		header = header.substring(7);
 		JwtAuthentication jwtAuth = new JwtAuthentication(header, null);
 		Authentication auth = manager.authenticate(jwtAuth);
 		log.info("authenticated = " + auth.isAuthenticated());
