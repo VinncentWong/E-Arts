@@ -70,9 +70,9 @@ public class Artist implements Human{
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "artist")
 	private List<SocialMedia> socialMedia;
 	
-	@OneToOne(mappedBy = "artist")
+	@OneToOne(mappedBy = "artist", cascade = CascadeType.ALL)
 	private PersonalInformation personalInformation;
 	
-	@OneToMany(mappedBy = "artist")
+	@OneToMany(mappedBy = "artist", cascade = CascadeType.ALL)
 	private List<ArtWork> artwork;
 }
