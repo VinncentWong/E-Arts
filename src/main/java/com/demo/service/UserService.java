@@ -6,6 +6,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.demo.domain.Response;
@@ -22,19 +23,27 @@ public class UserService {
 	
 	private final ResponseUtil util;
 	
+	private final BCryptPasswordEncoder bcrypt;
+
 	@Autowired
-	public UserService(UserRepository userRepo, ResponseUtil util) {
+	public UserService(UserRepository userRepo, ResponseUtil util, BCryptPasswordEncoder bcrypt) {
 		this.userRepo = userRepo;
 		this.util = util;
+		this.bcrypt = bcrypt;
 	}
 	
 	public ResponseEntity<Response> createUser(SignUpDto dto){
 		Optional<User> tempUser = this.userRepo.getUserByEmail(dto.getEmail());
 		if(tempUser.isPresent()){
-			
+			return this.util.sendInternalServerError("email sudah ada", false);
 		}
 		User user = new User();
 		user.setEmail(dto.getEmail());
-		return null;
+		user.setBirthDate(dto.getBirthDate());
+		user.setName(dto.getName());
+		user.setRole(dto.getRole());
+		user.setPassword(bcrypt.encode(dto.getPassword()));
+		User userDb = this.userRepo.save(user);
+		return this.util.sendCreated("sukses membuat user", true, userDb);
 	}
 }
