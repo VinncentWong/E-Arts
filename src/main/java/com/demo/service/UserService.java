@@ -75,4 +75,10 @@ public class UserService {
 		User user = this.userRepo.findById(userId).orElseThrow(() -> new UserNotFoundException());
 		return this.util.sendOk("user terautentikasi !", true, user);
 	}
+
+	public ResponseEntity<Response> deleteUser(Long userId) throws UserNotFoundException{
+		this.userRepo.findById(userId).orElseThrow(() -> new UserNotFoundException());
+		this.userRepo.deleteById(userId);
+		return this.util.sendOk("sukses menghapus data user", true, null);
+	}
 }
