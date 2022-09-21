@@ -28,6 +28,7 @@ public class JwtProvider implements AuthenticationProvider{
 
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+		log.info("jwt secret key = " + secretKey);
 		String token = authentication.getName();
 		log.info("token = " + token);
 		try {
