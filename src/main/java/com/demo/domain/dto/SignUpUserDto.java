@@ -11,7 +11,6 @@ import com.demo.domain.Role;
 
 import lombok.Data;
 
-@Entity
 @Data
 public class SignUpUserDto {
 
