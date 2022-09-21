@@ -15,10 +15,12 @@ import com.demo.domain.Response;
 import com.demo.domain.User;
 import com.demo.domain.dto.LoginDto;
 import com.demo.domain.dto.SignUpDto;
+import com.demo.domain.dto.UserDto;
 import com.demo.exception.UserNotFoundException;
 import com.demo.repositories.UserRepository;
 import com.demo.util.JwtUtil;
 import com.demo.util.ResponseUtil;
+import com.demo.util.SetterNullAware;
 
 @Service
 @Transactional
@@ -80,5 +82,17 @@ public class UserService {
 		this.userRepo.findById(userId).orElseThrow(() -> new UserNotFoundException());
 		this.userRepo.deleteById(userId);
 		return this.util.sendOk("sukses menghapus data user", true, null);
+	}
+
+	public ResponseEntity<Response> updateUser(Long userId, UserDto dto) throws UserNotFoundException{
+		User user = this.userRepo.findById(userId).orElseThrow(() -> new UserNotFoundException());
+		SetterNullAware setter = new SetterNullAware();
+		setter.setString(user::setUsername, dto.getUsername());
+		setter.setString(user::setPhoneNumber, dto.getPhoneNumber());
+		setter.setString(user::setEmail, dto.getEmail());
+		setter.setString(user::setPassword, dto.getPassword());
+		setter.setGender(user::setGender, dto.getMale());
+		this.userRepo.save(user);
+		return this.util.sendOk("sukses mengupdate data user", true, null);
 	}
 }
