@@ -15,6 +15,7 @@ import com.demo.domain.Response;
 import com.demo.domain.User;
 import com.demo.domain.dto.LoginDto;
 import com.demo.domain.dto.SignUpDto;
+import com.demo.exception.UserNotFoundException;
 import com.demo.repositories.UserRepository;
 import com.demo.util.JwtUtil;
 import com.demo.util.ResponseUtil;
@@ -68,5 +69,10 @@ public class UserService {
 			return this.util.sendOk("user terautentikasi !", true, map);
 		}
 		return this.util.sendUnauthorized("user tidak terautentikasi !", false);
+	}
+
+	public ResponseEntity<Response> getUser(Long userId) throws UserNotFoundException{
+		User user = this.userRepo.findById(userId).orElseThrow(() -> new UserNotFoundException());
+		return this.util.sendOk("user terautentikasi !", true, user);
 	}
 }
