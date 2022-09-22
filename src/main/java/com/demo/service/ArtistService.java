@@ -12,10 +12,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.demo.domain.Artist;
-import com.demo.domain.Expertise;
-import com.demo.domain.PersonalInformation;
 import com.demo.domain.Response;
+import com.demo.domain.artist.Artist;
+import com.demo.domain.artist.Expertise;
+import com.demo.domain.artist.PersonalInformation;
 import com.demo.domain.dto.ExpertiseDto;
 import com.demo.domain.dto.LoginDto;
 import com.demo.domain.dto.SignUpDto;
