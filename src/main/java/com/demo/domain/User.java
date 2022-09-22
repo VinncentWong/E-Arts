@@ -59,4 +59,6 @@ public class User implements Human{
 
 	@Enumerated(EnumType.STRING)
 	private Role role;
+
+	private String phoneNumber;
 }
