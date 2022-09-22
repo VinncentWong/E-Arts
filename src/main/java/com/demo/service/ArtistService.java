@@ -1,16 +1,13 @@
 package com.demo.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.function.Predicate;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.expression.MapAccessor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -37,8 +34,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Transactional
 public class ArtistService {
-
-	private final PersonalInformationRepository repository;
 	
 	private final BCryptPasswordEncoder bcrypt;
 	
@@ -51,11 +46,10 @@ public class ArtistService {
 	private final ExpertiseRepository expertiseRepo;
 	
 	@Autowired
-	public ArtistService(PersonalInformationRepository repository, BCryptPasswordEncoder bcrypt, 
+	public ArtistService(BCryptPasswordEncoder bcrypt, 
 			ResponseUtil util, ArtistRepository artistRepo, JwtUtil<Artist> jwtUtil, 
 			PersonalInformationRepository personalRepo,
 			ExpertiseRepository expertiseRepo) {
-		this.repository = repository;
 		this.bcrypt = bcrypt;
 		this.util = util;
 		this.artistRepo = artistRepo;

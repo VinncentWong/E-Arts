@@ -20,7 +20,6 @@ import com.demo.domain.Response;
 import com.demo.domain.dto.ArtworkDto;
 import com.demo.exception.ArtistNotFoundException;
 import com.demo.exception.ArtworkNotFoundException;
-import com.demo.exception.InternalServerErrorException;
 import com.demo.exception.PhotoNotFoundException;
 import com.demo.repositories.ArtistRepository;
 import com.demo.repositories.ArtworkRepository;
