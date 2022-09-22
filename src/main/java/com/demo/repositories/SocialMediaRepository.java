@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.demo.domain.SocialMedia;
+import com.demo.domain.artist.SocialMedia;
 
 @Repository
 public interface SocialMediaRepository extends CrudRepository<SocialMedia, Long>{
