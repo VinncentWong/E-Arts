@@ -87,7 +87,7 @@ public class UserService {
 	public ResponseEntity<Response> updateUser(Long userId, UserDto dto) throws UserNotFoundException{
 		User user = this.userRepo.findById(userId).orElseThrow(() -> new UserNotFoundException());
 		SetterNullAware setter = new SetterNullAware();
-		setter.setString(user::setUsername, dto.getUsername());
+		setter.setString(user::setUserName, dto.getUsername());
 		setter.setString(user::setPhoneNumber, dto.getPhoneNumber());
 		setter.setString(user::setEmail, dto.getEmail());
 		setter.setString(user::setPassword, dto.getPassword());
