@@ -3,14 +3,18 @@ package com.demo.domain;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import lombok.Data;
 
@@ -22,31 +26,36 @@ public class User implements Human{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
+	@Transient
 	private String name;
 	
-	private String email;
-	
-	private String username;
+	private String firstName;
 
-	private String password;
-	
-	private String phoneNumber;
-	
+	private String lastName;
+
+	private String userName;
+
+	private String email;
+
+	@Enumerated(EnumType.STRING)
 	private Gender gender;
-	
+
+	@Temporal(TemporalType.DATE)
 	private Date birthDate;
 
-	private Role role;
+	private String password;
 
-	@CreationTimestamp
 	@Temporal(TemporalType.DATE)
+	@CreationTimestamp
 	private Date createdAt;
 
-	@CreationTimestamp
 	@Temporal(TemporalType.DATE)
+	@UpdateTimestamp
 	private Date updatedAt;
 
 	@Temporal(TemporalType.DATE)
 	private Date deletedAt;
+
+	private Role role;
 }
