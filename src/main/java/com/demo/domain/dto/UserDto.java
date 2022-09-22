@@ -30,4 +30,9 @@ public class UserDto {
 
     @Enumerated(EnumType.STRING)
     private Gender male;
+
+    // optional
+    private String firstName;
+
+    private String lastName;
 }
