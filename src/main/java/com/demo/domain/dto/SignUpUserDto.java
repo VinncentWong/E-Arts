@@ -2,7 +2,6 @@ package com.demo.domain.dto;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;

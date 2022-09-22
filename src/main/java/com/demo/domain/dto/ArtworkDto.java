@@ -7,7 +7,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import com.demo.domain.ArtWorkWeightDimension;
-import com.demo.domain.Artist;
 import com.demo.domain.CategoryArtwork;
 
 import lombok.Data;

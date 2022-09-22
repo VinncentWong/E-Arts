@@ -9,7 +9,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import com.demo.domain.Publications;
-import com.demo.domain.dto.PublicationDto;
 
 @Repository
 public interface PublicationRepository extends CrudRepository<Publications, Long>{

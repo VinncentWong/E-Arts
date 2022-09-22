@@ -20,8 +20,6 @@ import com.demo.exception.ArtistNotFoundException;
 import com.demo.exception.AwardsNotFoundException;
 import com.demo.service.AwardsService;
 
-import net.bytebuddy.asm.Advice.This;
-
 @RestController
 @RequestMapping("/awards")
 public class AwardsController {
