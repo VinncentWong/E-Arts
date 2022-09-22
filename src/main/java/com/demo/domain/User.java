@@ -57,5 +57,6 @@ public class User implements Human{
 	@Temporal(TemporalType.DATE)
 	private Date deletedAt;
 
+	@Enumerated(EnumType.STRING)
 	private Role role;
 }
