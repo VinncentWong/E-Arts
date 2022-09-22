@@ -1,6 +1,7 @@
 package com.demo.domain.user;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -70,5 +71,5 @@ public class User implements Human{
 	private String phoneNumber;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
-	private Address address;
+	private List<Address> address;
 }
