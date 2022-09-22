@@ -13,4 +13,5 @@ public interface UserRepository extends CrudRepository<User, Long>{
 	
 	@Query(nativeQuery = true, value = "SELECT * FROM user WHERE email = ?1 LIMIT 1")
 	Optional<User> getUserByEmail(String email);
+
 }
