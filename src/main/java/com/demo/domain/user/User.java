@@ -1,13 +1,16 @@
-package com.demo.domain;
+package com.demo.domain.user;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -15,6 +18,10 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
+import com.demo.domain.Gender;
+import com.demo.domain.Human;
+import com.demo.domain.Role;
 
 import lombok.Data;
 
@@ -61,4 +68,7 @@ public class User implements Human{
 	private Role role;
 
 	private String phoneNumber;
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
+	private Address address;
 }
