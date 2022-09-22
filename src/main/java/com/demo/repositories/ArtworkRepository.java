@@ -8,8 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.demo.domain.ArtWork;
-import com.demo.domain.Photo;
+import com.demo.domain.artist.ArtWork;
+import com.demo.domain.artist.Photo;
 
 @Repository
 public interface ArtworkRepository extends CrudRepository<ArtWork, Long> {

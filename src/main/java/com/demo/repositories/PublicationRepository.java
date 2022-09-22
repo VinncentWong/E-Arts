@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.demo.domain.Publications;
+import com.demo.domain.artist.Publications;
 
 @Repository
 public interface PublicationRepository extends CrudRepository<Publications, Long>{

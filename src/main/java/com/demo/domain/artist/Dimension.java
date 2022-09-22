@@ -1,4 +1,4 @@
-package com.demo.domain;
+package com.demo.domain.artist;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;

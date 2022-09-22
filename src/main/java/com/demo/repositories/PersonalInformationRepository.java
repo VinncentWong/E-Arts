@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.demo.domain.PersonalInformation;
+import com.demo.domain.artist.PersonalInformation;
 
 @Repository
 public interface PersonalInformationRepository extends CrudRepository<PersonalInformation, Long>{

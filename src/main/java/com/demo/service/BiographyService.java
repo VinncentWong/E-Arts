@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.demo.domain.Artist;
 import com.demo.domain.Response;
+import com.demo.domain.artist.Artist;
 import com.demo.domain.dto.BiographyDto;
 import com.demo.exception.ArtistNotFoundException;
 import com.demo.repositories.ArtistRepository;

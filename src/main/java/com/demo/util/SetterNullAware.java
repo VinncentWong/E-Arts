@@ -4,11 +4,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.function.Consumer;
 
-import com.demo.domain.ArtWork;
-import com.demo.domain.ArtWorkWeightDimension;
-import com.demo.domain.Artist;
 import com.demo.domain.Gender;
-import com.demo.domain.CategoryArtwork;
+import com.demo.domain.artist.ArtWork;
+import com.demo.domain.artist.ArtWorkWeightDimension;
+import com.demo.domain.artist.Artist;
+import com.demo.domain.artist.CategoryArtwork;
 
 public class SetterNullAware{
 

@@ -6,8 +6,8 @@ import javax.persistence.Lob;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import com.demo.domain.ArtWorkWeightDimension;
-import com.demo.domain.CategoryArtwork;
+import com.demo.domain.artist.ArtWorkWeightDimension;
+import com.demo.domain.artist.CategoryArtwork;
 
 import lombok.Data;
 

@@ -6,8 +6,8 @@ import java.util.Date;
 import org.mybatis.dynamic.sql.SqlColumn;
 import org.mybatis.dynamic.sql.SqlTable;
 
-import com.demo.domain.Artist;
 import com.demo.domain.Gender;
+import com.demo.domain.artist.Artist;
 
 import lombok.Getter;
 import lombok.Setter;

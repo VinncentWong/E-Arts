@@ -12,10 +12,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.demo.domain.Response;
-import com.demo.domain.User;
 import com.demo.domain.dto.LoginDto;
 import com.demo.domain.dto.SignUpDto;
 import com.demo.domain.dto.UserDto;
+import com.demo.domain.user.User;
 import com.demo.exception.UserNotFoundException;
 import com.demo.repositories.UserRepository;
 import com.demo.util.JwtUtil;

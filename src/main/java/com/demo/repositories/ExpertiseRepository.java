@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.demo.domain.Expertise;
+import com.demo.domain.artist.Expertise;
 
 @Repository
 public interface ExpertiseRepository extends CrudRepository<Expertise, Long> {

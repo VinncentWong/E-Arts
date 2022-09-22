@@ -11,12 +11,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.demo.domain.ArtWork;
-import com.demo.domain.ArtWorkWeightDimension;
-import com.demo.domain.Artist;
-import com.demo.domain.Dimension;
-import com.demo.domain.Photo;
 import com.demo.domain.Response;
+import com.demo.domain.artist.ArtWork;
+import com.demo.domain.artist.ArtWorkWeightDimension;
+import com.demo.domain.artist.Artist;
+import com.demo.domain.artist.Dimension;
+import com.demo.domain.artist.Photo;
 import com.demo.domain.dto.ArtworkDto;
 import com.demo.exception.ArtistNotFoundException;
 import com.demo.exception.ArtworkNotFoundException;

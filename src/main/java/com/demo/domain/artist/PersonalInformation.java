@@ -1,4 +1,4 @@
-package com.demo.domain;
+package com.demo.domain.artist;
 
 import java.util.Date;
 
@@ -14,6 +14,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.demo.domain.Gender;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;

@@ -1,4 +1,4 @@
-package com.demo.domain;
+package com.demo.domain.artist;
 
 import java.util.Date;
 import java.util.List;
@@ -18,6 +18,9 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
+import com.demo.domain.Human;
+import com.demo.domain.Role;
 
 import lombok.Data;
 import lombok.ToString;

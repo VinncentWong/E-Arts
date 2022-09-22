@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.demo.domain.Artist;
-import com.demo.domain.Educational;
 import com.demo.domain.Response;
+import com.demo.domain.artist.Artist;
+import com.demo.domain.artist.Educational;
 import com.demo.domain.dto.EducationalDto;
 import com.demo.exception.ArtistNotFoundException;
 import com.demo.exception.EducationalNotFoundException;

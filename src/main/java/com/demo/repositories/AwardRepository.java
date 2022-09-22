@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.demo.domain.Awards;
+import com.demo.domain.artist.Awards;
 
 @Repository
 public interface AwardRepository extends CrudRepository<Awards, Long>{
