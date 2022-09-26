@@ -16,6 +16,7 @@ import com.demo.domain.Response;
 import com.demo.domain.artist.Artist;
 import com.demo.domain.artist.Expertise;
 import com.demo.domain.artist.PersonalInformation;
+import com.demo.domain.dto.AfterLoginDto;
 import com.demo.domain.dto.ExpertiseDto;
 import com.demo.domain.dto.LoginDto;
 import com.demo.domain.dto.SignUpDto;
@@ -86,6 +87,16 @@ public class ArtistService {
 		} else {
 			throw new InternalServerErrorException();
 		}
+	}
+
+	public ResponseEntity<Response> addArtistData(AfterLoginDto dto, Long artistId) throws ArtistNotFoundException{
+		Artist artist = artistRepo.findById(artistId).orElseThrow(() -> new ArtistNotFoundException());
+		artist.setFirstName(dto.getFirstName());
+		artist.setLastName(dto.getLastName());
+		artist.setProvince(dto.getProvince());
+		artist.setCity(dto.getCity());
+		this.artistRepo.save(artist);
+		return this.util.sendOk("sukses menambahkan data artist", true, artist);
 	}
 	
 	public ResponseEntity<Response> getArtistById(Long id) throws ArtistNotFoundException{
