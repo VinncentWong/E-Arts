@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.demo.domain.Response;
+import com.demo.domain.dto.AfterLoginDto;
 import com.demo.domain.dto.ExpertiseDto;
 import com.demo.domain.dto.LoginDto;
 import com.demo.domain.dto.SignUpDto;
@@ -42,6 +43,11 @@ public class ArtistController {
 	@PostMapping("/login")
 	public ResponseEntity<Response> loginArtist(@RequestBody @Valid LoginDto dto) throws ArtistNotFoundException, InternalServerErrorException{
 		return service.loginArtist(dto);
+	}
+
+	@PostMapping("/adddata/{id}")
+	public ResponseEntity<Response> addArtistData(@RequestBody @Valid AfterLoginDto dto, @PathVariable("id") Long id) throws ArtistNotFoundException{
+		return service.addArtistData(dto, id);
 	}
 	
 	@GetMapping("/get/{id}")
