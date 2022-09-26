@@ -26,7 +26,7 @@ public class JwtUtil<T extends Human> {
 	public String implementationGenerateToken(T obj) {
 		Map<String, Object> claims = new HashMap<>();
 		claims.put("id", obj.getId());
-		claims.put("name", obj.getName());
+		claims.put("username", obj.getUsername());
 		claims.put("createdAt", obj.getCreatedAt());
 		claims.put("role", obj.getRole());
 		String token = Jwts.builder()
