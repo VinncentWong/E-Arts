@@ -50,7 +50,7 @@ public class UserService {
 		User user = new User();
 		user.setEmail(dto.getEmail());
 		user.setBirthDate(dto.getBirthDate());
-		user.setName(dto.getName());
+		user.setUsername(dto.getUsername());
 		user.setRole(dto.getRole());
 		user.setPassword(bcrypt.encode(dto.getPassword()));
 		User userDb = this.userRepo.save(user);
@@ -89,7 +89,7 @@ public class UserService {
 		SetterNullAware setter = new SetterNullAware();
 		setter.setString(user::setFirstName, dto.getFirstName());
 		setter.setString(user::setLastName, dto.getLastName());
-		setter.setString(user::setUserName, dto.getUsername());
+		setter.setString(user::setUsername, dto.getUsername());
 		setter.setString(user::setPhoneNumber, dto.getPhoneNumber());
 		setter.setString(user::setEmail, dto.getEmail());
 		setter.setString(user::setPassword, dto.getPassword());

@@ -20,7 +20,7 @@ public class SignUpDto {
 	
 	@NotNull
 	@NotBlank
-	private String name;
+	private String username;
 	
 	@NotNull
 	@NotBlank
