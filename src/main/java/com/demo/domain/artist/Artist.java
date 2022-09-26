@@ -43,6 +43,14 @@ public class Artist implements Human{
 	private String about;
 	
 	private String biography;
+
+	private String firstName;
+
+	private String lastName;
+
+	private String province;
+
+	private String city;
 	
 	@Enumerated(EnumType.STRING)
 	private Role role;
