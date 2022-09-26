@@ -38,7 +38,7 @@ public class Artist implements Human{
 	
 	private String password;
 	
-	private String name;
+	private String username;
 	
 	private String about;
 	

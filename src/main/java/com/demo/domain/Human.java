@@ -4,7 +4,7 @@ import java.util.Date;
 
 public interface Human {
 	Long getId();
-	String getName();
+	String getUsername();
 	Date getCreatedAt();
 	Role getRole();
 }

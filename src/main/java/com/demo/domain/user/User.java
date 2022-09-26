@@ -34,15 +34,12 @@ public class User implements Human{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	@Transient
-	private String name;
 	
 	private String firstName;
 
 	private String lastName;
 
-	private String userName;
+	private String username;
 
 	private String email;
 
