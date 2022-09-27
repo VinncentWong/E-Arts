@@ -20,6 +20,7 @@ import com.demo.domain.dto.AfterLoginDto;
 import com.demo.domain.dto.ExpertiseDto;
 import com.demo.domain.dto.LoginDto;
 import com.demo.domain.dto.SignUpDto;
+import com.demo.domain.dto.UpdateArtistDto;
 import com.demo.exception.ArtistNotFoundException;
 import com.demo.exception.ExpertiseNotFoundException;
 import com.demo.exception.InternalServerErrorException;
@@ -28,6 +29,7 @@ import com.demo.repositories.ExpertiseRepository;
 import com.demo.repositories.PersonalInformationRepository;
 import com.demo.util.JwtUtil;
 import com.demo.util.ResponseUtil;
+import com.demo.util.SetterNullAware;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -97,6 +99,18 @@ public class ArtistService {
 		artist.setCity(dto.getCity());
 		this.artistRepo.save(artist);
 		return this.util.sendOk("sukses menambahkan data artist", true, artist);
+	}
+
+	public ResponseEntity<Response> updateArtist(Long artistId, UpdateArtistDto dto) throws ArtistNotFoundException{
+		Artist artist = artistRepo.findById(artistId).orElseThrow(() -> new ArtistNotFoundException());
+		SetterNullAware setter = new SetterNullAware();
+		if(bcrypt.matches(dto.getOldPassword(), artist.getPassword())){
+			setter.setString(artist::setEmail, dto.getEmail());
+			setter.setString(artist::setPassword, dto.getNewPassword());
+			setter.setString(artist::setUsername, dto.getUsername());
+			return this.util.sendOk("sukses mengupdate data artist", true, artist);
+		}
+		return this.util.sendInternalServerError("terjadi kesalahan pada saat mengupdate data artist", false);
 	}
 	
 	public ResponseEntity<Response> getArtistById(Long id) throws ArtistNotFoundException{
