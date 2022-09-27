@@ -7,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.demo.domain.artist.ArtWork;
 
 @Entity
 public class FavoriteArtwork {
@@ -17,6 +17,8 @@ public class FavoriteArtwork {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnore
     private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private ArtWork artwork;
 }
