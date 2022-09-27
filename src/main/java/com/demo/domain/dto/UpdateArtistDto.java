@@ -14,7 +14,7 @@ public class UpdateArtistDto {
 
     @NotNull
     @NotBlank
-    private String password;
+    private String username;
 
     @NotNull
     @NotBlank
