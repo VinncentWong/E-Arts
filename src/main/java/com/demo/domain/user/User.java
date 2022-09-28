@@ -22,6 +22,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import com.demo.domain.Gender;
 import com.demo.domain.Human;
 import com.demo.domain.Role;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
@@ -68,4 +69,8 @@ public class User implements Human{
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
 	private List<Address> address;
+
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	@JsonIgnore
+	private Order order;
 }
