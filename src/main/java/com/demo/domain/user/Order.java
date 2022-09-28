@@ -34,7 +34,7 @@ public class Order {
 
     private Integer quantity;
 
-    private Integer totalPRice;
+    private Integer totalPrice;
 
     @Temporal(TemporalType.DATE)
     @CreationTimestamp
