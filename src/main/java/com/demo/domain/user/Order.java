@@ -32,6 +32,10 @@ public class Order {
     @ManyToOne(fetch = FetchType.LAZY)
     private ArtWork artwork;
 
+    private Integer quantity;
+
+    private Integer totalPRice;
+
     @Temporal(TemporalType.DATE)
     @CreationTimestamp
     private Date createdAt;
