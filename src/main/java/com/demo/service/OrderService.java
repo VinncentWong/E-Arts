@@ -62,4 +62,10 @@ public class OrderService {
         Order order = this.orderRepository.getOrder(userId, orderId).orElseThrow(() -> new OrderNotFoundException());
         return this.util.sendOk("sukses menemukan data order", true, order);
     }
+
+    public ResponseEntity<Response> deleteOrder(Long orderId) throws OrderNotFoundException{
+        this.orderRepository.findById(orderId).orElseThrow(() -> new OrderNotFoundException());
+        this.orderRepository.deleteById(orderId);
+        return this.util.sendOk("sukses menghapus data order", true, null);
+    }
 }
