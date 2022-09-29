@@ -72,5 +72,5 @@ public class User implements Human{
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	@JsonIgnore
-	private Order order;
+	private List<Order> order;
 }
