@@ -18,6 +18,7 @@ import com.demo.security.manager.JwtManager;
 
 import lombok.extern.slf4j.Slf4j;
 
+
 @Slf4j
 public class JwtFilter extends OncePerRequestFilter{
 	
