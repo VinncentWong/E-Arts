@@ -1,5 +1,7 @@
 package com.demo.service;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import com.demo.domain.dto.OrderDto;
 import com.demo.domain.user.Order;
 import com.demo.domain.user.User;
 import com.demo.exception.ArtworkNotFoundException;
+import com.demo.exception.OrderNotFoundException;
 import com.demo.exception.UserNotFoundException;
 import com.demo.repositories.ArtworkRepository;
 import com.demo.repositories.OrderRepository;
@@ -48,5 +51,15 @@ public class OrderService {
         order.setTotalPrice(dto.getTotalPrice());
         this.orderRepository.save(order);
         return this.util.sendCreated("sukses membuat order", true, order);
+    }
+
+    public ResponseEntity<Response> getOrders(Long userId) throws OrderNotFoundException{
+        List<Order> orders = this.orderRepository.getOrders(userId).orElseThrow(() -> new OrderNotFoundException());
+        return this.util.sendOk("sukses menemukan data order", true, orders);
+    }
+
+    public ResponseEntity<Response> getOrder(Long userId, Long orderId) throws OrderNotFoundException{
+        Order order = this.orderRepository.getOrder(userId, orderId).orElseThrow(() -> new OrderNotFoundException());
+        return this.util.sendOk("sukses menemukan data order", true, order);
     }
 }
