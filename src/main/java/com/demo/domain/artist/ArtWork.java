@@ -46,5 +46,5 @@ public class ArtWork {
 	private ArtWorkWeightDimension dimension;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "artwork")
-	private Order order;
+	private List<Order> order;
 }
