@@ -13,7 +13,7 @@ import com.demo.domain.user.Order;
 public interface OrderRepository extends CrudRepository<Order, Long>{
 
     @Query(nativeQuery = true, value = "SELECT * FROM order WHERE order = ?1")
-    Optional<List<Order>> getOrders(Long artistId);
+    Optional<List<Order>> getOrders(Long userId);
 
     @Query(nativeQuery = true, value = "SELECT * FROM order WHERE user_id = ?1 AND id = ?2")
     Optional<Order> getOrder(Long userId, Long orderId);
