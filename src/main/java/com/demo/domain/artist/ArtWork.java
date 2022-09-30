@@ -16,9 +16,11 @@ import com.demo.domain.user.Order;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
+import lombok.ToString;
 
 @Entity
 @Data
+@ToString(exclude = {"order"})
 public class ArtWork {
 
 	@Id
@@ -46,5 +48,6 @@ public class ArtWork {
 	private ArtWorkWeightDimension dimension;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "artwork")
+	@JsonIgnore
 	private List<Order> order;
 }
