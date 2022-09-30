@@ -17,9 +17,11 @@ import org.hibernate.annotations.UpdateTimestamp;
 import com.demo.domain.artist.ArtWork;
 
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 @Entity
+@ToString(exclude = {"user"})
 public class Order {
     
     @Id
