@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,6 +39,11 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<Response> login(@RequestBody @Valid LoginDto dto){
         return this.service.login(dto);
+    }
+
+    @GetMapping("/get/{id}")
+    public ResponseEntity<Response> getUser(@PathVariable("id") Long id) throws UserNotFoundException{
+        return this.service.getUser(id);
     }
 
     @PatchMapping("/update/{userId}")
