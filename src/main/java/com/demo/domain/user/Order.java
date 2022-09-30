@@ -20,7 +20,7 @@ import lombok.Data;
 import lombok.ToString;
 
 @Data
-@Entity
+@Entity(name = "orders")
 @ToString(exclude = {"user"})
 public class Order {
     
