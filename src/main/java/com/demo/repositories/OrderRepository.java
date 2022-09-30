@@ -12,9 +12,9 @@ import com.demo.domain.user.Order;
 @Repository
 public interface OrderRepository extends CrudRepository<Order, Long>{
 
-    @Query(nativeQuery = true, value = "SELECT * FROM order WHERE order = ?1")
+    @Query(nativeQuery = true, value = "SELECT * FROM orders WHERE order = ?1")
     Optional<List<Order>> getOrders(Long userId);
 
-    @Query(nativeQuery = true, value = "SELECT * FROM order WHERE user_id = ?1 AND id = ?2")
+    @Query(nativeQuery = true, value = "SELECT * FROM orders WHERE user_id = ?1 AND id = ?2")
     Optional<Order> getOrder(Long userId, Long orderId);
 }
