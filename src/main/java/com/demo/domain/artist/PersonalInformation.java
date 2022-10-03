@@ -31,29 +31,29 @@ public class PersonalInformation {
 	
 	private String phoneNumber;
 	
-	private boolean isPhoneNumberPrivate;
+	private Boolean isPhoneNumberPrivate;
 	
 	private String province;
 	
-	private boolean isProvincePrivate;
+	private Boolean isProvincePrivate;
 	
 	private String city;
 	
-	private boolean isCityPrivate;
+	private Boolean isCityPrivate;
 	
 	private String address;
 	
-	private boolean isAddressPrivate;
+	private Boolean isAddressPrivate;
 	
 	@Temporal(TemporalType.DATE)
 	private Date dateBirth;
 	
-	private boolean isDateBirthPrivate;
+	private Boolean isDateBirthPrivate;
 	
 	@Enumerated(EnumType.STRING)
 	private Gender gender;
 	
-	private boolean isGenderPrivate;
+	private Boolean isGenderPrivate;
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JsonIgnore // ignore this property to serialized into JSON because it will caused circular depedency
