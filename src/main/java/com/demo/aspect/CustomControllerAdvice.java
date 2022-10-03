@@ -12,6 +12,7 @@ import com.demo.exception.AwardsNotFoundException;
 import com.demo.exception.EducationalNotFoundException;
 import com.demo.exception.ExpertiseNotFoundException;
 import com.demo.exception.InternalServerErrorException;
+import com.demo.exception.OrderNotFoundException;
 import com.demo.exception.PhotoNotFoundException;
 import com.demo.exception.PublicationNotFoundException;
 import com.demo.exception.SocialMediaNotFoundException;
@@ -75,6 +76,11 @@ public class CustomControllerAdvice {
 	
 	@ExceptionHandler(UserNotFoundException.class)
 	public ResponseEntity<Response> sendUserNotFoundException(){
-		return this.util.sendInternalServerError("udata user tidak ditemukan", false);
+		return this.util.sendInternalServerError("data user tidak ditemukan", false);
+	}
+
+	@ExceptionHandler(OrderNotFoundException.class)
+	public ResponseEntity<Response> sendOrderNotFoundException(){
+		return this.util.sendInternalServerError("data order tidak ditemukan", false);
 	}
 }
