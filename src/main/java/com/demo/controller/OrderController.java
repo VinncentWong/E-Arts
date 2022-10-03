@@ -19,8 +19,11 @@ import com.demo.exception.OrderNotFoundException;
 import com.demo.exception.UserNotFoundException;
 import com.demo.service.OrderService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
 @RequestMapping("/order")
+@Slf4j
 public class OrderController {
     
     private final OrderService service;
@@ -42,6 +45,7 @@ public class OrderController {
 
     @GetMapping("/get")
     public ResponseEntity<Response> getOrder(@Param("userId") Long userId, @Param("orderId") Long orderId) throws OrderNotFoundException{
+        log.info("user id = " + userId + " order id = " + orderId);
         return this.service.getOrder(userId, orderId);
     }
 }
