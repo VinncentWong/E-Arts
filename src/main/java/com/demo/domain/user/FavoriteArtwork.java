@@ -14,7 +14,10 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import com.demo.domain.artist.ArtWork;
 
+import lombok.Data;
+
 @Entity
+@Data
 public class FavoriteArtwork {
     
     @Id
