@@ -1,5 +1,7 @@
 package com.demo.domain.superadmin;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,8 +25,8 @@ public class SuperAdmin {
     private String password;
 
     @CreationTimestamp
-    private String createdAt;
+    private Date createdAt;
 
     @UpdateTimestamp
-    private String updatedAt;
+    private Date updatedAt;
 }

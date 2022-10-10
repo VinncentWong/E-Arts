@@ -1,9 +1,15 @@
 package com.demo.domain.admin.entity;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import org.apache.ibatis.annotations.Update;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import com.demo.domain.Role;
 
@@ -21,9 +27,11 @@ public class Admin {
 
     private String password;
 
-    private String createdAt;
+    @CreationTimestamp
+    private Date createdAt;
 
-    private String updatedAt;
+    @UpdateTimestamp
+    private Date updatedAt;
 
     private Role role;
 }
