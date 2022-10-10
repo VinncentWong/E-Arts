@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.demo.domain.Response;
+import com.demo.exception.AdminNotFoundException;
 import com.demo.exception.ArtistNotFoundException;
 import com.demo.exception.ArtworkNotFoundException;
 import com.demo.exception.AwardsNotFoundException;
@@ -82,5 +83,10 @@ public class CustomControllerAdvice {
 	@ExceptionHandler(OrderNotFoundException.class)
 	public ResponseEntity<Response> sendOrderNotFoundException(){
 		return this.util.sendInternalServerError("data order tidak ditemukan", false);
+	}
+
+	@ExceptionHandler(AdminNotFoundException.class)
+	public ResponseEntity<Response> sendAdminNotFoundException(){
+		return this.util.sendInternalServerError("data admin tidak ditemukan", false);
 	}
 }
