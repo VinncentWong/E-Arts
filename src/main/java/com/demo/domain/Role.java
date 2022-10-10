@@ -1,5 +1,5 @@
 package com.demo.domain;
 
 public enum Role {
-	ARTIST, MEMBER
+	ARTIST, MEMBER, ADMIN, SUPERADMIN
 }
