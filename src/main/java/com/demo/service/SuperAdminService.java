@@ -11,6 +11,7 @@ import com.demo.domain.Response;
 import com.demo.domain.Role;
 import com.demo.domain.admin.dto.LoginDto;
 import com.demo.domain.admin.entity.Admin;
+import com.demo.exception.AdminNotFoundException;
 import com.demo.repositories.AdminRepository;
 import com.demo.util.ResponseUtil;
 
@@ -38,5 +39,14 @@ public class SuperAdminService {
         admin.setPassword(bcrypt.encode(dto.getPassword()));
         this.repository.save(admin);
         return this.util.sendCreated("sukses membuat admin", true, admin);
+    }
+
+    public ResponseEntity<Response> getAdmin(Long id) throws AdminNotFoundException{
+        Admin admin = this.repository.findById(id).orElseThrow(() -> new AdminNotFoundException());
+        return this.util.sendOk("sukses mendapatkan admin", true, admin);
+    }
+
+    public ResponseEntity<Response> getAdmins(){
+        return this.util.sendOk("sukses mendapatkan semua data admin", true, this.repository.findAll());
     }
 }
