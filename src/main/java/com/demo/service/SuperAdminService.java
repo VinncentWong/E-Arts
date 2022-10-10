@@ -43,7 +43,9 @@ public class SuperAdminService {
         BCryptPasswordEncoder bcrypt, 
         ResponseUtil util, 
         SuperAdminRepository sAdmin,
-        JwtUtil jwt){
+        JwtUtil<SuperAdmin> jwt
+    )
+    {
         this.repository = repository;
         this.bcrypt = bcrypt;
         this.util = util;
