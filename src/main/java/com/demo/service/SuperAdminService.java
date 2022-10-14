@@ -53,15 +53,15 @@ public class SuperAdminService {
         this.jwt = jwt;
     }
 
-    public ResponseEntity<Response> createSuperAdmin(SuperAdmin sAdmin){
+    public ResponseEntity<Response> createSuperAdmin(LoginDto dto){
         SuperAdmin superAdmin = new SuperAdmin();
-        superAdmin.setUsername(sAdmin.getUsername());
-        superAdmin.setPassword(bcrypt.encode(sAdmin.getPassword()));
+        superAdmin.setUsername(dto.getUsername());
+        superAdmin.setPassword(bcrypt.encode(dto.getPassword()));
         superAdmin.setRole(Role.SUPERADMIN);
         return this.util.sendCreated("sukses membuat super admin", true, superAdmin);
     }
 
-    public ResponseEntity<Response> login(LoginDto dto) throws SuperAdminNotFoundException{
+    public ResponseEntity<Response> loginSuperAdmin(LoginDto dto) throws SuperAdminNotFoundException{
         SuperAdmin superAdmin = this.sAdminRepository.getSuperAdminByUsername(dto.getUsername()).orElseThrow(() -> new SuperAdminNotFoundException());
         if(bcrypt.matches(dto.getPassword(),superAdmin.getPassword())){
             String token = jwt.generateToken(jwt::implementationGenerateToken, superAdmin);
