@@ -15,7 +15,6 @@
 <br>
 **- MyBatis**
 <br>
-<br>
 **- Maven**
 <br>
 # Endpoint sementara
