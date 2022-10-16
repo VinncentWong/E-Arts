@@ -15,6 +15,9 @@
 <br>
 **- MyBatis**
 <br>
+<br>
+**- Maven**
+<br>
 # Endpoint sementara
 
 ### BASE URL: https://e-arts.herokuapp.com/
