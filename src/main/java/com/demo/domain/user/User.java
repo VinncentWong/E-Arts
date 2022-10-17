@@ -43,6 +43,9 @@ public class User implements Human{
 
 	private String email;
 
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
+	private List<LikedArtwork> listLikedArtwork;
+
 	@Enumerated(EnumType.STRING)
 	private Gender gender;
 
