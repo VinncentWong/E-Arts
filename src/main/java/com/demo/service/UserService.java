@@ -12,11 +12,18 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.demo.domain.Response;
+import com.demo.domain.artist.ArtWork;
+import com.demo.domain.artist.Artist;
 import com.demo.domain.dto.LoginDto;
 import com.demo.domain.dto.SignUpDto;
 import com.demo.domain.dto.UserDto;
+import com.demo.domain.user.LikedArtwork;
 import com.demo.domain.user.User;
+import com.demo.exception.ArtistNotFoundException;
+import com.demo.exception.ArtworkNotFoundException;
 import com.demo.exception.UserNotFoundException;
+import com.demo.repositories.ArtistRepository;
+import com.demo.repositories.ArtworkRepository;
 import com.demo.repositories.UserRepository;
 import com.demo.util.JwtUtil;
 import com.demo.util.ResponseUtil;
@@ -34,12 +41,25 @@ public class UserService {
 
 	private final JwtUtil<User> jwt;
 
+	private final ArtistRepository artistRepo;
+
+	private final ArtworkRepository artworkRepo;
+
 	@Autowired
-	public UserService(UserRepository userRepo, ResponseUtil util, BCryptPasswordEncoder bcrypt, JwtUtil<User> jwt) {
+	public UserService(
+		UserRepository userRepo, 
+		ResponseUtil util, 
+		BCryptPasswordEncoder bcrypt, 
+		JwtUtil<User> jwt, 
+		ArtistRepository artistRepo,
+		ArtworkRepository artworkRepo) 
+	{
 		this.userRepo = userRepo;
 		this.util = util;
 		this.bcrypt = bcrypt;
 		this.jwt = jwt;
+		this.artistRepo = artistRepo;
+		this.artworkRepo = artworkRepo;
 	}
 	
 	public ResponseEntity<Response> createUser(SignUpDto dto){
@@ -96,5 +116,33 @@ public class UserService {
 		setter.setGender(user::setGender, dto.getMale());
 		this.userRepo.save(user);
 		return this.util.sendOk("sukses mengupdate data user", true, null);
+	}
+
+	public ResponseEntity<Response> likeArtwork(Long artistId, Long userId, Long artworkId) throws ArtistNotFoundException, UserNotFoundException, ArtworkNotFoundException{
+		Artist artist = this.artistRepo.findById(artistId).orElseThrow(() -> new ArtistNotFoundException());
+		User user = this.userRepo.findById(userId).orElseThrow(() -> new UserNotFoundException());
+		ArtWork artwork = this.artworkRepo.findById(artworkId).orElseThrow(() -> new ArtworkNotFoundException());
+		LikedArtwork likedArtwork = new LikedArtwork();
+		likedArtwork.setArtwork(artwork);
+		likedArtwork.setUser(user);
+		artist.setAccumulativeLike(artist.getAccumulativeArtwork() + 1);
+		user.getListLikedArtwork().add(likedArtwork);
+		this.userRepo.save(user);
+		this.artistRepo.save(artist);
+		return this.util.sendOk("sukses menambahkan like", true, likedArtwork);
+	}
+
+	public ResponseEntity<Response> unlikeArtwork(Long artistId, Long userId, Long artworkId) throws ArtistNotFoundException, UserNotFoundException, ArtworkNotFoundException{
+		Artist artist = this.artistRepo.findById(artistId).orElseThrow(() -> new ArtistNotFoundException());
+		User user = this.userRepo.findById(userId).orElseThrow(() -> new UserNotFoundException());
+		ArtWork artwork = this.artworkRepo.findById(artworkId).orElseThrow(() -> new ArtworkNotFoundException());
+		LikedArtwork likedArtwork = new LikedArtwork();
+		likedArtwork.setArtwork(artwork);
+		likedArtwork.setUser(user);
+		artist.setAccumulativeLike(artist.getAccumulativeArtwork() - 1);
+		user.getListLikedArtwork().remove(likedArtwork);
+		this.userRepo.save(user);
+		this.artistRepo.save(artist);
+		return this.util.sendOk("sukses menghapus like", true, likedArtwork);
 	}
 }
