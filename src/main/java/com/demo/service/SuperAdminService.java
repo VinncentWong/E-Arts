@@ -90,4 +90,10 @@ public class SuperAdminService {
     public ResponseEntity<Response> getAdmins(){
         return this.util.sendOk("sukses mendapatkan semua data admin", true, this.repository.findAll());
     }
+
+    public ResponseEntity<Response> deleteAdmin(Long adminId) throws AdminNotFoundException{
+        this.repository.findById(adminId).orElseThrow(() -> new AdminNotFoundException());
+        this.repository.deleteById(adminId);
+        return this.util.sendOk("sukses menghapus data admin", true, null);
+    }
 }
