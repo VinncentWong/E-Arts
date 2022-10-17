@@ -16,6 +16,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -54,6 +55,18 @@ public class Artist implements Human{
 	
 	@Enumerated(EnumType.STRING)
 	private Role role;
+
+	@ColumnDefault("0")
+	private Integer accumulativeLike;
+
+	@ColumnDefault("0")
+	private Integer accumulativeArtwork;
+
+	@ColumnDefault("0")
+	private Integer accumulativePublication;
+
+	@ColumnDefault("0")
+	private Integer accumulativeSells;
 	
 	@CreationTimestamp
 	@Temporal(TemporalType.DATE)
