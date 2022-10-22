@@ -24,7 +24,7 @@ public class ArtWorkWeightDimension {
 	
 	private Integer weight;
 	
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JsonIgnore
 	private ArtWork artwork;
 	
