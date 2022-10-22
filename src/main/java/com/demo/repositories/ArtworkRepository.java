@@ -38,4 +38,8 @@ public interface ArtworkRepository extends CrudRepository<ArtWork, Long> {
 	
 	@Query(nativeQuery = true, value = "SELECT * FROM photo WHERE id = ?1")
 	Optional<Photo> getPhoto(Long photoId);
+
+	@Query(nativeQuery = true, value = "DELETE FROM photo WHERE artwork_id = ?1")
+	@Modifying
+	void deletePhoto(Long artworkId);
 }
