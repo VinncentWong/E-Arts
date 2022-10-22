@@ -26,9 +26,12 @@ import com.demo.repositories.ArtworkRepository;
 import com.demo.util.ResponseUtil;
 import com.demo.util.SetterNullAware;
 
+import lombok.extern.slf4j.Slf4j;
+
 
 @Service
 @Transactional
+@Slf4j
 public class ArtworkService {
 
 	private final ArtworkRepository repository;
@@ -77,12 +80,15 @@ public class ArtworkService {
 		artwork.setPhoto(listPhoto);
 		artwork.setStatus(dto.getStatus());
 		artwork.setStock(dto.getStock());
-		artworkDimension.setWeight(dto.getDimension().getWeight());
 		artwork.setDimension(artworkDimension);
+		artworkDimension.setWeight(dto.getDimension().getWeight());
+		artworkDimension.setArtwork(artwork);
 		dimension.setHeight(temp.getHeight());
 		dimension.setLength(temp.getLength());
 		dimension.setWidth(temp.getWidth());
+		dimension.setArtWorkDimension(artworkDimension);
 		artwork.getDimension().setDimension(dimension);
+		log.info("artwork dimension in artwork = " + artwork.getDimension()); 
 		this.repository.save(artwork);
 		return this.util.sendCreated("sukses membuat artwork!", true, artwork);
 	}
@@ -118,6 +124,7 @@ public class ArtworkService {
 		Dimension dimension = artwork.getDimension().getDimension();
 		this.repository.deleteDimension(dimension.getId());
 		this.repository.deleteArtworkWeight(artworkWeight.getId());
+		this.repository.deletePhoto(artworkId);
 		this.repository.deleteArtwork(artistId, artworkId);
 		return this.util.sendOk("sukses menghapus data artwork", true, null);
 	}
