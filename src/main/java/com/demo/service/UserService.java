@@ -29,8 +29,11 @@ import com.demo.util.JwtUtil;
 import com.demo.util.ResponseUtil;
 import com.demo.util.SetterNullAware;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
 @Transactional
+@Slf4j
 public class UserService {
 
 	private final UserRepository userRepo;
@@ -82,6 +85,7 @@ public class UserService {
 		if(tempUser.isEmpty()){
 			return this.util.sendUnauthorized("data user tidak ditemukan!", false);
 		}
+		log.info("user role = " + tempUser.get().getRole());
 		User user = tempUser.get();
 		if(bcrypt.matches(dto.getPassword(), user.getPassword())){
 			String token = this.jwt.generateToken(this.jwt::implementationGenerateToken, user);

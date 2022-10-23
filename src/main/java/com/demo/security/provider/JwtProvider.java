@@ -38,6 +38,7 @@ public class JwtProvider implements AuthenticationProvider{
 							.getBody();
 			String role = claims.get("role").toString();
 			role = new String("ROLE_" + role);
+			log.info("role = " + role);
 			var auth = new ArrayList<GrantedAuthority>();
 			auth.add(new SimpleGrantedAuthority(role));
 			return new JwtAuthentication(token, null, auth);

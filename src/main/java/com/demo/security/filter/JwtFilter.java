@@ -33,6 +33,7 @@ public class JwtFilter extends OncePerRequestFilter{
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
 		String header = request.getHeader("Authorization");
+		log.info("header = " + header);
 		if(header == null) {
 			filterChain.doFilter(request, response);
 			return;
@@ -45,6 +46,7 @@ public class JwtFilter extends OncePerRequestFilter{
 			response.sendError(HttpStatus.FORBIDDEN.value(), "header \"Authorization\" tidak valid!");
 			return;
 		} 
+		log.info("auth content = " + auth);
 		SecurityContextHolder.getContext().setAuthentication(auth);
 		filterChain.doFilter(request, response);
 	}
