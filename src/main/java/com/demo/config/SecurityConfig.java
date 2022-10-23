@@ -48,7 +48,7 @@ public class SecurityConfig {
 		.mvcMatchers("/superadmin/**")
 		.hasRole("SUPERADMIN")
 		.mvcMatchers("/user/**")
-		.hasRole("USER")
+		.hasRole("MEMBER")
 		.and()
 		.formLogin().disable()
 		.httpBasic().disable();
