@@ -53,7 +53,7 @@ public class ArtWorkController {
 	}
 	
 	@GetMapping("/gets/{artistId}")
-	public ResponseEntity<Response> getArtworks(@PathVariable("artistId") Long id) throws ArtworkNotFoundException{
+	public ResponseEntity<Response> getArtworks(@PathVariable("artistId") Long id) throws ArtworkNotFoundException, ArtistNotFoundException{
 		return this.service.getArtwork(id);
 	}
 	
