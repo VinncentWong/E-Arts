@@ -93,7 +93,8 @@ public class ArtworkService {
 		return this.util.sendCreated("sukses membuat artwork!", true, artwork);
 	}
 	
-	public ResponseEntity<Response> getArtwork(Long artistId) throws ArtworkNotFoundException{
+	public ResponseEntity<Response> getArtwork(Long artistId) throws ArtworkNotFoundException, ArtistNotFoundException{
+		this.artistRepository.findById(artistId).orElseThrow(() -> new ArtistNotFoundException());
 		List<ArtWork> listArtwork = this.repository.getArtworks(artistId).orElseThrow(() -> new ArtworkNotFoundException());
 		return this.util.sendOk("sukses mendapatkan artwork", true, listArtwork);
 	}
